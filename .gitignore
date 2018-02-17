@@ -1,4 +1,4 @@
-src/*.js
+dist/
 node_modules/
 
 ## Directory-based project format
