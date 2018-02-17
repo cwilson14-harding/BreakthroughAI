@@ -1,9 +1,7 @@
 dist/
 node_modules/
 
-## Directory-based project format
-.idea/workspace.xml
-.idea/tasks.xml
+
 # and these sensitive or high-churn files:
 .idea/dataSources.ids
 .idea/dataSources.xml
