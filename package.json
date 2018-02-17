@@ -1,0 +1,23 @@
+{
+  "name": "BreakthroughAI",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cwilson14-harding/BreakthroughAI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cwilson14-harding/BreakthroughAI/issues"
+  },
+  "homepage": "https://github.com/cwilson14-harding/BreakthroughAI#readme",
+  "dependencies": {
+    "metrix-js": "^1.0.1"
+  }
+}
