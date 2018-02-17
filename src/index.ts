@@ -1,25 +1,37 @@
-import fs = require('fs');
-import { MetricsCollector, MetricItem } from "metrix-js/lib/index";
+var http = require("http"),
+    url = require("url"),
+    path = require("path"),
+    fs = require("fs"),
+    port = process.argv[2] || 8080;
 
-// read and parse data file
-let inputData = JSON.parse(fs.readFileSync('./data.json').toString());
-// define metric rules
-let metricRules: MetricItem[] = [
-    { field: 'code', matcher: 'regex', match: '(\\d)\\d\\d', metric: 'router.hit.$100' },
-    { field: 'code', matcher: 'regex', match: '\\d{3}', metric: 'router.hit' },
-    { field: 'url', matcher: 'substring', match: 'api/note', metric: 'api.note.hit' },
-    { field: 'url', matcher: 'substring', match: 'api/note', metric: 'api.hit' },
-    { field: 'url', matcher: 'substring', match: 'api/policy', metric: 'api.hit' }
-];
-// create and configure metrics collector
-let collector = new MetricsCollector(metric => console.log(metric));
-collector.addMetrics(metricRules);
+http.createServer(function(request, response) {
 
-/*console.log(`For input:
----------------------
-${JSON.stringify(inputData, null, 3)}
- 
-hits:
----------------------`);
-// process input data
-inputData.forEach(item => collector.measure(item));*/
+    var uri = url.parse(request.url).pathname
+        , filename = path.join(process.cwd(), uri);
+
+    fs.exists(filename, function(exists) {
+        if(!exists) {
+            response.writeHead(404, {"Content-Type": "text/plain"});
+            response.write("404 Not Found\n");
+            response.end();
+            return;
+        }
+
+        if (fs.statSync(filename).isDirectory()) filename += '/index.html';
+
+        fs.readFile(filename, "binary", function(err, file) {
+            if(err) {
+                response.writeHead(500, {"Content-Type": "text/plain"});
+                response.write(err + "\n");
+                response.end();
+                return;
+            }
+
+            response.writeHead(200);
+            response.write(file, "binary");
+            response.end();
+        });
+    });
+}).listen(parseInt(port, 10));
+
+console.log("Static file server running at\n  => http://localhost:" + port + "/\nCTRL + C to shutdown");
