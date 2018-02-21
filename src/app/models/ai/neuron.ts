@@ -1,9 +1,9 @@
 import {Synapse} from './synapse';
 
 export class Neuron {
-	backSynapses: Synapse[] = [];
-	frontSynapses: Synapse[] = [];
-	public value: number = Math.random();
+	leftSynapses: Synapse[] = [];
+	rightSynapses: Synapse[] = [];
+	public value = 0;
 
 	constructor() {}
 
@@ -19,27 +19,22 @@ export class Neuron {
 		synapse.rightNeuron = neuron;
 
 		// Add the synapse to both neurons.
-		this.frontSynapses.push(synapse);
-		neuron.backSynapses.push(synapse);
+		this.rightSynapses.push(synapse);
+		neuron.leftSynapses.push(synapse);
 	}
 
 	// Retrieves values from previous synapses and pushes values onto the next synapses.
 	activate() {
-		for (const synapse of this.frontSynapses) {
+		for (const synapse of this.rightSynapses) {
 			// Influence the values of the front synapses.
 			const targetNeuron = synapse.rightNeuron;
 			targetNeuron.value += Neuron.relu(this.value * synapse.weight);
 		}
 	}
 
-	train() {
-		for (const synapse of this.frontSynapses) {
-			// TODO: Be influenced by the values of the front synapses.
-		}
-
-		for (const synapse of this.backSynapses) {
-			// TODO: Influenced the values of the synapses.
-			synapse.backpropogate(this.value);
+	backpropogate(learningRate: number, adjustment: number) {
+		for (const synapse of this.leftSynapses) {
+			// TODO: Influence the values of the synapses.
 		}
 	}
 }

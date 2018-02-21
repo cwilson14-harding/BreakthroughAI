@@ -134,12 +134,11 @@ export class NeuralNetwork {
 		return move;
 	}
 
-	private trainNetwork() {
+	private trainNetwork(learningRate: number, expectedOutput: number[]) {
 		// Train the network.
-		this.outputLayer.train();
+		this.outputLayer.backpropogate(learningRate, expectedOutput);
 		for (let i = this.hiddenLayers.length - 1; i >= 0; --i) {
-			this.hiddenLayers[i].train();
+			this.hiddenLayers[i].backpropogate(learningRate, expectedOutput);
 		}
-		this.inputLayer.train();
 	}
 }

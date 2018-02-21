@@ -33,9 +33,9 @@ export class Layer {
 	}
 
 	// Train the network
-	train() {
+	backpropogate(learningRate: number, expectedOutput: number[]) {
 		for (const neuron of this.neurons) {
-			neuron.train();
+			neuron.backpropogate(learningRate, 0);
 		}
 	}
 }
