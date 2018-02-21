@@ -45,6 +45,7 @@ export class NeuralNetwork {
 		}
 		const t1 = performance.now();
 		console.log('Done. (' + (t1 - t0) + ' ms)');
+		console.log(this);
 	}
 
 	private static denormalizeMove(move: Move, turn: number): Move {
@@ -144,12 +145,12 @@ export class NeuralNetwork {
 		this.adjustError(expectedOutput);
 	}
 
-	applyTraining() {
-		this.outputLayer.backpropogateError(1);
+	applyTraining(learningRate: number) {
+		this.outputLayer.backpropogateError(learningRate);
 		for (const layer of this.hiddenLayers) {
-			layer.backpropogateError(1);
+			layer.backpropogateError(learningRate);
 		}
-		this.inputLayer.backpropogateError(1);
+		this.inputLayer.backpropogateError(learningRate);
 	}
 
 	resetTraining() {
