@@ -2,21 +2,22 @@ import {Layer} from './layer';
 import {Move} from '../move';
 import {Neuron} from './neuron';
 import {Coordinate} from '../game-core/coordinate';
-import {forwardRef} from '@angular/core';
 import {AIBoard} from './aiboard';
 
 export class NeuralNetwork {
-	inputLayer: Layer = new Layer(65);
-	hiddenLayers: Layer[] = [new Layer(40), new Layer(40)]; // Mean number of input and output layers.
-	outputLayer: Layer = new Layer(192);
+	inputLayer: Layer;
+	hiddenLayers: Layer[];
+	outputLayer: Layer;
 
 	constructor(path?: string) {
 		if (path) {
 
 		} else {
+			console.log('Creating new Neural Net');
 			// Create randomized layers.
 
-			this.inputLayer = new Layer(65);
+			// 64 possible spaces with 3 possible moves each = 192.
+			this.inputLayer = new Layer(64);
 
 			// Mean number of input and output layers.
 			this.hiddenLayers = [
@@ -24,6 +25,19 @@ export class NeuralNetwork {
 				new Layer(60)];
 
 			this.outputLayer = new Layer(192);
+
+			// Connect the layers.
+			this.inputLayer.connect(this.hiddenLayers[0]);
+			for (let i = 0; i < this.hiddenLayers.length - 1; ++i) {
+				this.hiddenLayers[i].connect(this.hiddenLayers[i + 1]);
+			}
+
+			// Connect to the output layer.
+			if (this.hiddenLayers.length > 0) {
+				this.hiddenLayers[this.hiddenLayers.length - 1].connect(this.outputLayer);
+			} else {
+				this.inputLayer.connect(this.outputLayer);
+			}
 		}
 	}
 
@@ -37,8 +51,8 @@ export class NeuralNetwork {
 		board.setAIBoardState(boardState);
 
 		// Set the value of the input layer neurons.
-		for (let i = 0; i < this.inputLayer.neurons.length; ++i) {
-			this.inputLayer.neurons[i].value = boardState[i];
+		for (let i = 1; i < this.inputLayer.neurons.length; ++i) {
+			this.inputLayer.neurons[i - 1].value = boardState[i];
 		}
 
 		// Activate each of the layers in sequence.
@@ -77,6 +91,7 @@ export class NeuralNetwork {
 		}
 		this.inputLayer.train();
 
+		console.log(this);
 		return move;
 	}
 }
