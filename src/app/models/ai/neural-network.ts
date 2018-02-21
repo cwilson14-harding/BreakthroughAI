@@ -3,8 +3,6 @@ import {Move} from '../move';
 import {Neuron} from './neuron';
 import {Coordinate} from '../game-core/coordinate';
 import {AIBoard} from './aiboard';
-import {MCTS} from './mcts';
-import {Board} from '../board';
 
 export class NeuralNetwork {
 	inputLayer: Layer;
@@ -15,7 +13,8 @@ export class NeuralNetwork {
 		if (path) {
 
 		} else {
-			console.log('Creating new Neural Net');
+			console.log('Creating new Neural Net...');
+			const time: Date = new Date();
 			// Create randomized layers.
 
 			// 64 possible spaces with 3 possible moves each = 192.
@@ -40,6 +39,8 @@ export class NeuralNetwork {
 			} else {
 				this.inputLayer.connect(this.outputLayer);
 			}
+
+			console.log('Done. (' + (new Date() - time) + ' ms)');
 		}
 	}
 
@@ -59,8 +60,6 @@ export class NeuralNetwork {
 		// Create a board with the given state.
 		const board: AIBoard = new AIBoard();
 		board.setAIBoardState(boardState);
-		//return new Move(new Coordinate(6,5), new Coordinate(5,5));
-		//console.log(NeuralNetwork.denormalizeMove( new Move(new Coordinate(6,5), new Coordinate(5,5)), board.turn * -1));
 
 		this.setInputWithNormalizedState(board.getNormalizedState(board.turn));
 		this.processInput();
