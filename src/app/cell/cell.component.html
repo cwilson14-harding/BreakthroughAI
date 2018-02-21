@@ -1,0 +1,11 @@
+<div class="cell {{boardClass}}">
+  <div style="position: absolute;">
+    <div class="legend">
+      {{column}}{{row}}
+    </div>
+    <div class="w3-display-middle">
+      <img *ngIf="state==1" src="assets/sprites/human game piece.png" class="avatar {{(boardClass.includes('selected')) ? 'w3-spin' : ''}}">
+      <img *ngIf="state==2" src="assets/sprites/AI game piece.png" class="avatar {{(boardClass.includes('selected')) ? 'w3-spin' : ''}}">
+    </div>
+  </div>
+</div>

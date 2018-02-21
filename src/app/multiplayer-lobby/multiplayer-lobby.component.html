@@ -1,0 +1,348 @@
+<audio autoplay loop id="audioPlayer">
+  <source src="assets/music/garoad_-_va-11_hall-a_ex_-_bonus_tracks_collection_-_09_lifebeat_of_lilim__instrumental_version_.mp3" type="audio/mpeg">
+</audio>
+<!--<div *ngIf="auth.user | async as user">-->
+  <!--<div class="w3-container w3-center">-->
+    <!--<div class="w3-row">-->
+      <!--<h1> {{ user.displayName | uppercase }} </h1>-->
+      <!--<img  [src]='user.photoURL' class="proPic w3-padding">-->
+    <!--</div>-->
+    <!--<div class="w3-row w3-padding">-->
+      <!--<button class="w3-btn w3-round-xlarge w3-xlarge w3-black buttonStyle w3-opacity-min" style="width: 40%">PLAY</button>-->
+    <!--</div>-->
+    <!--<div class="w3-row w3-padding">-->
+      <!--<button class="w3-btn w3-round-xlarge w3-xlarge w3-black buttonStyle w3-opacity-min" (click)="logOff()" style="width: 40%">LOGOUT</button>-->
+    <!--</div>-->
+
+   <!--&lt;!&ndash; <div class="w3-container">-->
+      <!--<h1>Online Users:</h1>-->
+      <!--<div *ngFor="let available of availableUsers | async" class="w3-padding">-->
+        <!--<img  [src]='available.photoURL' style="width: 10%">-->
+        <!--<button>Start Game with {{available.displayName}}</button>-->
+      <!--</div>-->
+    <!--</div> &ndash;&gt;-->
+
+    <!--<div class = 'w3-container'>-->
+      <!--<h1>Open Games:</h1>-->
+      <!--<div *ngFor="let open of openGames | async">-->
+         <!--{{open.creatorName}}-->
+        <!--<button (click)="joinGame(user, open)">Join Game</button>-->
+        <!--<br>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="w3-container w3-padding">-->
+      <!--<div *ngIf="!isGameCreated">-->
+        <!--<button (click)="createNewGame(user)">Create Game</button>-->
+      <!--</div>-->
+    <!--</div>-->
+
+  <!--</div>-->
+<!--</div>-->
+
+<!--  EVERYTHING BELOW IS A PROTOTYPE WITH FAKE INFO THAT IS HARD CODED IN -->
+
+<particles [params]="myParams" [style]="myStyle" [width]=100 [height]=100>
+</particles>
+
+<div *ngIf="auth.user | async as user">
+  <div class="background" *ngIf="showLobby">
+    <div style="z-index: 1">
+      <div class="w3-bar greyBackground ulOpacity">
+        <div class="w3-btn selectedButton ulOpacity" (click)="goToLobby()">
+          <span class="gameListHeading">Lobby</span>
+        </div>
+        <div class="w3-btn greyBackground ulOpacity">
+          <span class="gameListHeading" (click)="goToLeaderboard()">Leaderboard</span>
+        </div>
+        <div class="w3-btn w3-right greyBackground ulOpacity">
+          <span class="gameListHeading" (click)="goToLogin()">Back</span>
+        </div>
+      </div>
+    </div>
+    <!-- DIV FOR LUKE -->
+    <div class="w3-half" *ngIf="luke" style="position: relative; z-index: 1">
+      <h1 class="headingText">Choose Opponent</h1>
+
+        <div>
+          <div class="w3-center">
+            <img src="assets/avatars/luke.png" style="width: 40%;">
+            <div class = "infoText">
+              Name: Luke Uebelein
+              <br>
+              Wins: 0
+              <br>
+              Losses: 25
+            </div>
+          </div>
+
+          <div class="w3-padding w3-center">
+            <div class="w3-button w3-black button" (click)="joinGame()">
+              Join Game
+            </div>
+            <div class="w3-button w3-black button" (click)="createGame(user.uid)">
+              Create Game
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- DIV FOR CJ -->
+    <div class="w3-half" *ngIf="cj" style="position: relative; z-index: 1">
+      <h1 class="headingText">Choose Opponent</h1>
+
+      <div>
+        <div class="w3-center">
+          <img src="../../assets/avatars/cjAvatar.png" style="width: 40%;">
+          <div class = "infoText">
+            Name: C.J Wilson
+            <br>
+            Wins: 25
+            <br>
+            Losses: 0
+          </div>
+        </div>
+
+        <div class="w3-padding w3-center">
+          <div class="w3-button w3-black button" (click)="joinGame()">
+            Join Game
+          </div>
+          <div class="w3-button w3-black button" (click)="createGame()">
+            Create Game
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- DIV FOR BRADLEY -->
+    <div class="w3-half" *ngIf="brad" style="position: relative; z-index: 1">
+      <h1 class="headingText">Choose Opponent</h1>
+
+      <div>
+        <div class="w3-center">
+          <img src="../../assets/avatars/bradAvatar.png" style="width: 40%;">
+          <div class = "infoText">
+            Name: Bradley Marques
+            <br>
+            Wins: 1
+            <br>
+            Losses: 1
+          </div>
+        </div>
+
+        <div class="w3-padding w3-center">
+          <div class="w3-button w3-black button" (click)="joinGame()">
+            Join Game
+          </div>
+          <div class="w3-button w3-black button" (click)="createGame()">
+            Create Game
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- DIV FOR DYLAN -->
+    <div class="w3-half" *ngIf="dylan" style="position: relative; z-index: 1">
+      <h1 class="headingText">Choose Opponent</h1>
+
+      <div>
+        <div class="w3-center">
+          <img src="../../assets/avatars/dylanAvatar.png" style="width: 40%;">
+          <div class = "infoText">
+            Name: Dylan Gonzalez
+            <br>
+            Wins: 1
+            <br>
+            Losses: 1
+          </div>
+        </div>
+
+        <div class="w3-padding w3-center">
+          <div class="w3-button w3-black button" (click)="joinGame()">
+            Join Game
+          </div>
+          <div class="w3-button w3-black button" (click)="createGame()">
+            Create Game
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- DIV FOR Alaina -->
+    <div class="w3-half" *ngIf="alaina" style="position: relative; z-index: 1">
+      <h1 class="headingText">Choose Opponent</h1>
+
+      <div>
+        <div class="w3-center">
+          <img src="../../assets/avatars/alainaAvatar.png" style="width: 40%;">
+          <div class = "infoText">
+            Name: Alaina Bridges
+            <br>
+            Wins: 0
+            <br>
+            Losses: 0
+          </div>
+        </div>
+
+        <div class="w3-padding w3-center">
+          <div class="w3-button w3-black button" (click)="joinGame()">
+            Join Game
+          </div>
+          <div class="w3-button w3-black button" (click)="createGame()">
+            Create Game
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="w3-half" style="padding-right: 2%">
+      <h1 class="headingText" style="position: relative; z-index: 1">Open Games</h1>
+      <!--<div *ngFor="let open of createdGame | async">-->
+      <!--<ul class="w3-ul w3-card-4">-->
+      <!--<li class="w3-bar greyBackground">-->
+      <!--<span class="w3-bar-item w3-button w3-white w3-xlarge w3-right" (click)="click_luke()"><i class="fa fa-angle-right" aria-hidden="true"></i></span>-->
+      <!--<img src="assets/avatars/luke.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">-->
+      <!--<div class="w3-bar-item">-->
+      <!--<span class="w3-large">{{open.creatorName}}</span><br>-->
+      <!--<span>0 wins; 25 Losses</span>-->
+      <!--</div>-->
+      <!--</li>-->
+      <!--</ul>-->
+      <!--<button (click)="createNewGame(user)">CREATE GAME</button>-->
+      <!--</div>-->
+
+      <div class="scrollGames">
+        <ul class="w3-ul w3-card-4 ulOpacity">
+
+          <li class="w3-bar greyBackground">
+            <span class="w3-bar-item w3-button w3-white w3-xlarge w3-right" (click)="click_luke()"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+            <img src="assets/avatars/luke.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+            <div class="w3-bar-item">
+              <span class="gameListHeading">Luke Uebelein</span><br>
+              <span class="gameListText">0 wins; 25 Losses</span>
+            </div>
+          </li>
+
+          <li class="w3-bar greyBackground">
+            <span class="w3-bar-item w3-button w3-white w3-xlarge w3-right" (click)="click_cj()"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+            <img src="assets/avatars/cjAvatar.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+            <div class="w3-bar-item">
+              <span class="gameListHeading">C.J. Wilson</span><br>
+              <span class="gameListText">25 wins; 0 Losses</span>
+            </div>
+          </li>
+
+          <li class="w3-bar greyBackground">
+            <span class="w3-bar-item w3-button w3-white w3-xlarge w3-right" (click)="click_brad()"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+            <img src="assets/avatars/bradAvatar.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+            <div class="w3-bar-item">
+              <span class="gameListHeading">Bradley Marques</span><br>
+              <span class="gameListText">1 win; 1 Loss</span>
+            </div>
+          </li>
+          <!--
+          <li class="w3-bar greyBackground">
+            <span class="w3-bar-item w3-button w3-white w3-xlarge w3-right" (click)="click_dylan()"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+            <img src="assets/avatars/dylanAvatar.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+            <div class="w3-bar-item">
+              <span class="gameListHeading">Dylan Gonzalez</span><br>
+              <span class="gameListText">1 win; 1 Loss</span>
+            </div>
+          </li>
+          <li class="w3-bar greyBackground">
+            <span class="w3-bar-item w3-button w3-white w3-xlarge w3-right" (click)="click_alaina()"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+            <img src="assets/avatars/alainaAvatar.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+            <div class="w3-bar-item">
+              <span class="gameListHeading">Alaina Bridges</span><br>
+              <span class="gameListText">0 wins; 0 Losses</span>
+            </div>
+          </li> -->
+
+          <!-- Using Firebase -->
+          <li *ngFor="let open of openGames | async" class="w3-bar greyBackground" [@flyInOut]="state">
+            <span class="w3-bar-item w3-button w3-white w3-xlarge w3-right" (click)="deleteGame(user.uid)"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+            <img src='{{open.pic}}' class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+            <div class="w3-bar-item">
+              <span class="gameListHeading">{{open.creatorName}}</span><br>
+              <span class="gameListText">0 wins; 0 Losses</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="w3-padding-64">
+
+      </div>
+    </div>
+  </div>
+  <!-- LEADERBOARD DIV -->
+  <div *ngIf="auth.user | async as user">
+    <div class="background" *ngIf="showLeaderboard">
+      <div class="w3-bar greyBackground ulOpacity">
+        <div class="w3-btn greyBackground ulOpacity" (click)="goToLobby()">
+          <span class="gameListHeading">Lobby</span>
+        </div>
+        <div class="w3-btn selectedButton ulOpacity">
+          <span class="gameListHeading" (click)="goToLeaderboard()">Leaderboard</span>
+        </div>
+        <div class="w3-btn w3-right greyBackground ulOpacity">
+          <span class="gameListHeading" (click)="goToLogin()">Back</span>
+        </div>
+      </div>
+
+      <h1 class="headingText">Leaderboard</h1>
+      <div class="w3-display-middle" style="width: 50%; padding-top: 3%">
+        <ul class="w3-ul w3-card-4 ulOpacity">
+
+          <li class="w3-bar greyBackground">
+            <img src="assets/avatars/circle.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+            <div class="w3-bar-item">
+              <span class="gameListHeading">AI</span><br>
+              <span class="gameListText">2,147,483,647 wins; 0 Losses</span>
+            </div>
+          </li>
+
+          <li class="w3-bar greyBackground">
+            <img src="assets/avatars/cjAvatar.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+            <div class="w3-bar-item">
+              <span class="gameListHeading">C.J. Wilson</span><br>
+              <span class="gameListText">25 wins; 0 Losses</span>
+            </div>
+          </li>
+
+          <li class="w3-bar greyBackground">
+            <img src="assets/avatars/bradAvatar.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+            <div class="w3-bar-item">
+              <span class="gameListHeading">Bradley Marques</span><br>
+              <span class="gameListText">1 win; 1 Loss</span>
+            </div>
+          </li>
+          <li class="w3-bar greyBackground">
+            <img src="assets/avatars/dylanAvatar.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+            <div class="w3-bar-item">
+              <span class="gameListHeading">Dylan Gonzalez</span><br>
+              <span class="gameListText">1 win; 1 Loss</span>
+            </div>
+          </li>
+
+          <li class="w3-bar greyBackground">
+            <img src="assets/avatars/luke.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+            <div class="w3-bar-item">
+              <span class="gameListHeading">Luke Uebelein</span><br>
+              <span class="gameListText">0 wins; 25 Losses</span>
+            </div>
+          </li>
+
+          <li class="w3-bar greyBackground">
+            <img src="assets/avatars/alainaAvatar.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+            <div class="w3-bar-item">
+              <span class="gameListHeading">Alaina Bridges</span><br>
+              <span class="gameListText">0 wins; 0 Losses</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+

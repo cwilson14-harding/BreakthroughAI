@@ -1,0 +1,43 @@
+body {
+  background: #222;
+  color: #f0f0f0;
+}
+
+.headerMessage {
+  color: slategray;
+}
+
+.messageBox {
+  position: relative;
+  top: 80px;
+  left: 600px;
+  transform: translate(-50%, -50%);
+  font-family: 'Lucidia Console', monospace;
+  font-size: 20px;
+  white-space: normal;
+  background-color: black;
+  text-align: left;
+  color: whitesmoke;
+  width: 728px; // To match the image width.
+  padding: 1px 12px 8px;
+}
+
+.message {
+  margin: 0;
+}
+
+.navigationHand {
+  background-color: black;
+  opacity: .8;
+}
+
+.navigationHand:hover {
+  background-color: darkgray;
+  opacity: 1;
+}
+.handLeft{
+  left: 100px;
+}
+.handRight{
+  right: 100px;
+}

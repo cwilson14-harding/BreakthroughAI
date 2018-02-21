@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400|Raleway:300');
+h1{
+  font-family: 'Raleway', sans-serif;
+}
+.messageBox {
+  display:block;
+  width: 100%;
+  margin-top:15px;
+
+  background:none;
+  border-left: 0;
+  border-top: 0;
+  border-right: 0 ;
+  padding: 12px 20px ;
+  color:#fff;
+  font-family: 'Raleway', sans-serif;
+  border-radius: 5px;
+}
+textarea{
+  background: transparent;
+  max-width:325px;
+  max-height:220px;
+  // resize:none;
+  color:whitesmoke;
+  overflow-y: scroll;
+}
+
+.roundedCorners{
+  border-radius: 20px;
+}
+input[type=text], textarea {
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  outline: none;
+  border: 1px solid #DDDDDD;
+  font-family: Raleway;
+}
+
+input[type=text]:focus, textarea:focus {
+  box-shadow: 0 0 5px #6646FF;
+  border: 1px solid #6646FF;
+}
+.btn{
+  padding:8px 16px;
+  margin: 10px 0 0 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #ffffff;
+  border: 2px solid lightslategray;
+  background:linear-gradient( 45deg, #fff 50%, #6646FF 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: whitesmoke;
+  position:relative;
+  font-family: Raleway;
+}
+.btn:after{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  background:linear-gradient(45deg, #6646FF 50%, transparent 50%);
+  z-index:-1;
+}
+.btn,.btn:after{
+  background-size:300%;
+  background-position:100%;
+  transition:0.3s;
+}
+.btn:hover,.btn:hover:after{
+  background-position:0;
+}
+.textStroke{
+  color:#FFF;
+}
+.textStroke:hover{
+  color: #6646FF;
+  text-shadow:
+    -1px -1px 0 #6646FF
+  -1px -1px 0 #6646FF
+  -1px -1px 0 #6646FF
+  -1px -1px 0 #6646FF
+}

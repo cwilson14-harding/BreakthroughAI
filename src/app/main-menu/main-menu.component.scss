@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css?family=VT323');
+
+h1{
+  font-family: 'VT323', monospace;
+  color: red;
+  font-size: 300%;
+}
+
+.backImg{
+  background-image: url("../../assets/backgrounds/sylvain-sarrailh-theexchange.jpg");
+  background-size: 200vh;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  position: fixed;
+  z-index: -1;
+}
+
+.buttonStyle{
+  width: 100%;
+  font-family: 'VT323', monospace;
+}
+
+.proPic{
+  width: 40%
+}
+.settingsCog:hover{
+  animation: fa-spin 2s infinite linear;
+}
+
+.vignette {
+  /* http://nimbupani.com/vignettes-with-css3-box-shadows.html */
+  -moz-box-shadow: inset 0 0 20em black;
+  -webkit-box-shadow: inset 0 0 20em black;
+  box-shadow: inset 0 0 20em black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  content: "";
+}

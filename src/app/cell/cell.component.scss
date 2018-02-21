@@ -1,0 +1,43 @@
+.cell{
+  width: 85px;
+  height: 85px;
+  box-sizing: border-box;
+  //border: 3px solid #f4af78;
+  border: 3px solid #00FFFF;
+  font-size: 5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cell:hover{
+  background-color: #c1cdcd;
+}
+
+.selected {
+  background-color: red !important;
+}
+
+.potentialMove {
+  background-color: blue;
+}
+
+.lastMove {
+  background-color: green;
+}
+
+.legend {
+  color: white;
+  font-size: 10pt;
+  position: relative;
+  transform: translate(-175%, 175%);
+  margin-left: 4px;
+  width: 20px;
+  left: 8px;
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 18px;
+}

@@ -1,0 +1,41 @@
+<audio autoplay loop id="audioPlayer">
+  <source src="assets/music/garoad_-_va-11_hall-a_-_second_round_-_26_those_who_dwell_in_shadows.mp3" type="audio/mpeg">
+</audio>
+<!--
+<div class="w3-container">
+  <div class="board w3-middle">
+    <div class="cell" *ngFor="let col of boardCells | async" (click)="makeMove(col.id, col.isOn)">
+      <p style="color: white; font-size: 20%">{{col.id}}</p>
+      <img src="/assets/avatar.png" *ngIf="col.isOn" style="width: 50%">
+    </div>
+  </div>
+</div>
+-->
+
+<div *ngIf="auth.user | async as user">
+  <div>
+    <app-chat></app-chat>
+  </div>
+  <div class="backImg">
+    <div class="w3-container w3-display-middle">
+      <div class="board">
+        <div class="row" *ngFor="let row of [7,6,5,4,3,2,1,0]">
+          <app-cell class="cell" *ngFor="let col of [0,1,2,3,4,5,6,7]"
+                    [state]="board.board[row][col]"
+                    [boardClass]="board.boardClass[row][col]"
+                    [legend]="row.toString()+col.toString()"
+                    (click)="selectRowCol([row, col]);">
+          </app-cell>
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let game of games | async">
+      <!-- <button (click)="getCurrentGame(user,game)">Get Game</button> -->
+      <!-- <button (click)="updateTurn()">Update Turn</button> -->
+    </div>
+  </div>
+</div>
+<!-- <div class="gameStatus">
+
+</div> -->
+<app-toolbar (newGameClicked)="newGameClicked($event)" (showChatClicked)="showChatClicked($event)" (forfeitClicked)="forfeitClicked($event)" ></app-toolbar>

@@ -1,0 +1,70 @@
+  <!-- LEADERBOARD DIV -->
+  <div *ngIf="auth.user | async as user">
+      <div class="background" *ngIf="showLeaderboard">
+        <div class="w3-bar greyBackground ulOpacity">
+          <div class="w3-btn greyBackground ulOpacity" (click)="goToLobby()">
+            <span class="gameListHeading">Lobby</span>
+          </div>
+          <div class="w3-btn selectedButton ulOpacity">
+            <span class="gameListHeading" (click)="goToLeaderboard()">Leaderboard</span>
+          </div>
+          <div class="w3-btn w3-right greyBackground ulOpacity">
+            <span class="gameListHeading" (click)="goToLogin()">Back</span>
+          </div>
+        </div>
+
+        <h1 class="headingText">Leaderboard</h1>
+        <div class="w3-display-middle" style="width: 50%; padding-top: 3%">
+          <ul class="w3-ul w3-card-4 ulOpacity">
+
+            <li class="w3-bar greyBackground">
+              <img src="assets/avatars/circle.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+              <div class="w3-bar-item">
+                <span class="gameListHeading">AI</span><br>
+                <span class="gameListText">2,147,483,647 wins; 0 Losses</span>
+              </div>
+            </li>
+
+            <li class="w3-bar greyBackground">
+              <img src="assets/avatars/cjAvatar.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+              <div class="w3-bar-item">
+                <span class="gameListHeading">C.J. Wilson</span><br>
+                <span class="gameListText">25 wins; 0 Losses</span>
+              </div>
+            </li>
+
+            <li class="w3-bar greyBackground">
+              <img src="assets/avatars/bradAvatar.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+              <div class="w3-bar-item">
+                <span class="gameListHeading">Bradley Marques</span><br>
+                <span class="gameListText">1 win; 1 Loss</span>
+              </div>
+            </li>
+            <li class="w3-bar greyBackground">
+              <img src="assets/avatars/dylanAvatar.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+              <div class="w3-bar-item">
+                <span class="gameListHeading">Dylan Gonzalez</span><br>
+                <span class="gameListText">1 win; 1 Loss</span>
+              </div>
+            </li>
+
+            <li class="w3-bar greyBackground">
+              <img src="assets/avatars/luke.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+              <div class="w3-bar-item">
+                <span class="gameListHeading">Luke Uebelein</span><br>
+                <span class="gameListText">0 wins; 25 Losses</span>
+              </div>
+            </li>
+
+            <li class="w3-bar greyBackground">
+              <img src="assets/avatars/alaniaAvatar.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+              <div class="w3-bar-item">
+                <span class="gameListHeading">Alania Bridges</span><br>
+                <span class="gameListText">0 wins; 0 Losses</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>

@@ -1,0 +1,37 @@
+<!--<div class="w3-black">
+
+  <img src="../../assets/logos/systemBreakLogo.png">
+</div>
+-->
+
+<div *ngIf="rogue">
+  <div class="w3-black" style="height: 100vh">
+    <!-- Rogue Entertainment Logo -->
+      <div class="w3-display-middle w3-center">
+        <img src="assets/logos/rogueLogo.png" class="w3-animate-zoom" style="width: 95%">
+      </div>
+      <div class="w3-center typingText">
+        <span class="font" typingAnimation [typeSpeed]="50" [condition]="start" [startDelay]="1" [hideCursorOnComplete]="true" (complete)="onComplete()">
+          ROGUE ENTERTAINMENT PRESENTS
+        </span>
+      </div>
+  </div>
+</div>
+
+<div *ngIf="logo">
+  <div class="w3-black w3-container" style="height: 100vh">
+    <!-- SystemBreakLogo -->
+      <div>
+        <img src="assets/logos/systemBreakLogo.png" class="w3-animate-zoom"
+             style="width: 100%; position: fixed; margin-top: -30%; left: -3%">
+      </div>
+  </div>
+</div>
+
+<div class="w3-container w3-display-bottomright">
+  <div class="w3-row w3-padding">
+    <button class="w3-btn w3-round-xlarge w3-xlarge w3-black buttonStyle w3-opacity-min" (click)="toHomePage()">SKIP</button>
+  </div>
+</div>
+
+

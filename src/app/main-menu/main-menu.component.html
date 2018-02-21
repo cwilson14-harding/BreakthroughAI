@@ -1,0 +1,126 @@
+<audio autoplay loop id="audioPlayer">
+  <source src="assets/music/Garoad - VA-11 HALL-A - Second Round - 16 JC Elton's.mp3" type="audio/mpeg">
+</audio>
+<particles [params]="myParams" [style]="myStyle" [width]="width" [height]="height">
+</particles>
+<div class="w3-container">
+  <div *ngIf="auth.user | async; then authenticated else guest">
+
+  </div>
+</div>
+
+
+<ng-template #guest>
+  <!-- <div class="w3-container w3-center w3-display-middle">
+    <h1 class="w3-opacity-min">Login with Google</h1>
+
+    <div class="w3-row w3-padding">
+      <button class="w3-btn w3-round-xlarge w3-xlarge w3-black buttonStyle w3-opacity-min" (click)="loginGoogle()">
+        LOGIN
+      </button>
+    </div>
+    <div class="w3-row w3-padding">
+      <button class="w3-btn w3-round-xlarge w3-xlarge w3-black buttonStyle w3-opacity-min">
+        PLAY AS GUEST
+      </button>
+    </div>
+  </div>
+  <div class="w3-container w3-display-bottomright">
+    <div class="w3-row w3-padding">
+      <button class="w3-btn w3-round-xlarge w3-xlarge w3-black buttonStyle w3-opacity" (click)="toHome()">
+        <i class="fa fa-home"></i>
+      </button>
+    </div>
+  </div> -->
+</ng-template>
+
+<div class="vignette"></div>
+<!-- User logged in -->
+<ng-template #authenticated>
+  <div *ngIf="auth.user | async as user">
+    <!--<div class="w3-container w3-center w3-display-middle">-->
+      <!--<div class="w3-row">-->
+        <!--<h1> {{ user.displayName | uppercase }} </h1>-->
+        <!--<img  [src]='user.photoURL' class="proPic w3-padding">-->
+      <!--</div>-->
+      <!--&lt;!&ndash;<div class="w3-row w3-padding">&ndash;&gt;-->
+        <!--&lt;!&ndash;<button class="w3-btn w3-round-xlarge w3-xlarge w3-black buttonStyle w3-opacity-min" (click)="playGame()" style="width: 40%">PLAY</button>&ndash;&gt;-->
+      <!--&lt;!&ndash;</div>&ndash;&gt;-->
+      <!--<div class="w3-row w3-padding">-->
+        <!--<button class="w3-btn w3-round-xlarge w3-xlarge w3-black buttonStyle w3-opacity-min" (click)="goToMulti(user)" style="width: 40%">MULTI-PLAYER</button>-->
+      <!--</div>-->
+      <!--<div class="w3-row w3-padding">-->
+        <!--<button class="w3-btn w3-round-xlarge w3-xlarge w3-black buttonStyle w3-opacity-min" (click)="logOff(user)" style="width: 40%">LOGOUT</button>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="w3-container w3-padding-64">-->
+
+    <!--</div>-->
+
+    <!--<p>UID: {{ user.uid }}</p>-->
+
+  <!--  <h3>Online Users:</h3>
+    <div *ngFor="let available of availableUsers | async" class="w3-padding w3-hover-blue">
+      <img [src]="available.photoURL" style="width: 5%"> <span (click)="startGame(available.uid, available.displayName)">Start Game with {{available.displayName}}</span>
+    </div>
+    <br> -->
+
+    <div *ngIf="!showSettings && !showTutorial" >
+      <div class="w3-container w3-padding-64">
+        <div class="w3-display-topright" style="z-index: 1">
+          <i class="fa fa-cog w3-padding w3-xxlarge settingsCog" style="color:#F2F2F2" (click)="goToSettings()"></i>
+        </div>
+
+        <div class="w3-container w3-center w3-display-middle" style="height: 17vh; width: 55vw; z-index: 1">
+
+
+          <div class="w3-center w3-display-middle">
+            <div>
+              <img class="w3-display-topmiddle" src="assets/logos/systemBreakLogoSmall.png" style="width: 200%; position: relative;">
+              <!-- <h1> WELCOME {{ user.displayName | uppercase }}! </h1> -->
+            </div>
+            <div class=" w3-opacity-min">
+              <div class="w3-row w3-padding">
+                <button class="w3-btn w3-round-xlarge w3-xlarge w3-black buttonStyle " (click)="goToMulti(user)">Multi-Player</button>
+              </div>
+              <div class="w3-row w3-padding">
+                <button class="w3-btn w3-round-xlarge w3-xlarge w3-black buttonStyle " (click)="playGame()">Single Player</button>
+              </div>
+              <div class="w3-row w3-padding">
+                <button class="w3-btn w3-round-xlarge w3-xlarge w3-black buttonStyle " (click)="goToTutorial()">Tutorial</button>
+              </div>
+              <div class="w3-row w3-padding">
+                <button class="w3-btn w3-round-xlarge w3-xlarge w3-black buttonStyle " (click)="logOff(user)">Logout</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="showSettings">
+      <div class="w3-container w3-padding-64">
+        <div class="w3-container w3-center w3-display-middle w3-white w3-opacity-min" style="height: 70vh; width: 55vw; z-index: 1">
+          <div class="w3-display-topright">
+            <i class="fa fa-chevron-circle-left w3-padding w3-xxlarge w3-hover-opacity" (click)="goBack()"></i>
+          </div>
+          <div class="w3-center w3-display-middle">
+            <app-settings></app-settings>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="showTutorial">
+      <div class="w3-container w3-padding-64">
+        <div class="w3-container w3-center w3-display-middle" style="height: 100vh; width: 100vw; z-index: 1">
+          <div class="w3-display-topright">
+            <i class="fa fa-chevron-circle-left w3-padding w3-xxlarge w3-hover-opacity w3-text-aqua" (click)="goBack()"></i>
+          </div>
+          <div class="w3-center w3-display-middle">
+            <app-tutorial></app-tutorial>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<div class="backImg"></div>
