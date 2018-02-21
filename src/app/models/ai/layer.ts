@@ -43,7 +43,7 @@ export class Layer {
 	}
 
 	// Train the network. Should only be called on the output layer.
-	adjustError(learningRate: number, expectedOutput: number[]) {
+	adjustError(expectedOutput: number[]) {
 		for (let i = 0; i < this.neurons.length; ++i) {
 			for (const synapse of this.neurons[i].leftSynapses) {
 				synapse.error += expectedOutput[i] - synapse.weight;
@@ -52,11 +52,11 @@ export class Layer {
 		}
 	}
 
-	backpropogateError() {
+	backpropogateError(learningRate: number) {
 		// Adjust the synapse weights.
 		for (const neuron of this.neurons) {
 			for (const synapse of neuron.leftSynapses) {
-				synapse.weight += synapse.error / synapse.errorCount;
+				synapse.backpropogateError(learningRate);
 			}
 		}
 	}

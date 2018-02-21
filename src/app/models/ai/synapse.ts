@@ -7,11 +7,12 @@ export class Synapse {
 	error = 0;
 	errorCount = 0;
 
-	propogate(value: number) {
-		// TODO: Let the edge value of this synapse be influenced.
-	}
-
-	backpropogate(value: number) {
+	backpropogateError(learningRate: number) {
 		// TODO: Let the weight of this synapse be influenced.
+		this.weight = (this.error / this.errorCount) * learningRate;
+		for (const synapse of this.leftNeuron.leftSynapses) {
+			synapse.error += this.error;
+			synapse.error += this.errorCount;
+		}
 	}
 }

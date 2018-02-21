@@ -141,11 +141,15 @@ export class NeuralNetwork {
 		this.setInputWithNormalizedState(board.getNormalizedState(board.turn));
 		this.processInput();
 
-		this.adjustError(1, expectedOutput);
+		this.adjustError(expectedOutput);
 	}
 
 	applyTraining() {
-		this.outputLayer.backpropogateError();
+		this.outputLayer.backpropogateError(1);
+		for (const layer of this.hiddenLayers) {
+			layer.backpropogateError(1);
+		}
+		this.inputLayer.backpropogateError(1);
 	}
 
 	resetTraining() {
@@ -156,8 +160,8 @@ export class NeuralNetwork {
 		this.inputLayer.resetError();
 	}
 
-	private adjustError(learningRate: number, expectedOutput: number[]) {
+	private adjustError(expectedOutput: number[]) {
 		// Adjust the error calculations.
-		this.outputLayer.adjustError(learningRate, expectedOutput);
+		this.outputLayer.adjustError(expectedOutput);
 	}
 }
