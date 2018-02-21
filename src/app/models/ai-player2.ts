@@ -19,6 +19,7 @@ export class AIPlayer2 implements Player {
 			this.reject = reject;
 
 			const move: Move = this.neuralNetwork.getMove(board.board.getAIBoardState());
+			console.log(move);
 			if (move) {
 				this.resolve(move);
 			} else {

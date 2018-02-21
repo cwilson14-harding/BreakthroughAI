@@ -7,12 +7,16 @@ export class Neuron {
 
 	constructor() {}
 
+	static relu(x: number): number {
+		return Math.max(0, x);
+	}
+
 	// Connect two neurons with a synapse.
 	connect(neuron: Neuron) {
 		// Create the synapse.
 		const synapse: Synapse = new Synapse();
-		synapse.frontNeuron = this;
-		synapse.backNeuron = neuron;
+		synapse.leftNeuron = this;
+		synapse.rightNeuron = neuron;
 
 		// Add the synapse to both neurons.
 		this.frontSynapses.push(synapse);
@@ -21,13 +25,10 @@ export class Neuron {
 
 	// Retrieves values from previous synapses and pushes values onto the next synapses.
 	activate() {
-		for (const synapse of this.backSynapses) {
-			// TODO: Be influenced by the values of the synapses.
-		}
-
 		for (const synapse of this.frontSynapses) {
-			// TODO: Influence the values of the front synapses.
-			synapse.propogate(this.value);
+			// Influence the values of the front synapses.
+			const targetNeuron = synapse.rightNeuron;
+			targetNeuron.value += Neuron.relu(this.value * synapse.weight);
 		}
 	}
 

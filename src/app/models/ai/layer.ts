@@ -25,6 +25,13 @@ export class Layer {
 		}
 	}
 
+	// Clears leftover data from the neurons before activation of the previous layer.
+	clear() {
+		for (const neuron of this.neurons) {
+			neuron.value = 0;
+		}
+	}
+
 	// Train the network
 	train() {
 		for (const neuron of this.neurons) {

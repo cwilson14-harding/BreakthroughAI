@@ -3,6 +3,8 @@ import {Move} from '../move';
 import {Neuron} from './neuron';
 import {Coordinate} from '../game-core/coordinate';
 import {AIBoard} from './aiboard';
+import {MCTS} from './mcts';
+import {Board} from '../board';
 
 export class NeuralNetwork {
 	inputLayer: Layer;
@@ -41,27 +43,65 @@ export class NeuralNetwork {
 		}
 	}
 
-	static relu(x: number): number {
-		return Math.max(0, x);
+	private static denormalizeMove(move: Move, turn: number): Move {
+		if (turn === -1) {
+			return move;
+		} else {
+			const fromRow = move.from.row * -1 + 7;
+			const fromCol =  move.from.column * -1 + 7;
+			const toRow = move.to.row * -1 + 7;
+			const toCol = move.to.column * -1 + 7;
+			return new Move(new Coordinate(fromRow, fromCol), new Coordinate(toRow, toCol));
+		}
 	}
 
 	getMove(boardState: number[]): Move {
 		// Create a board with the given state.
 		const board: AIBoard = new AIBoard();
 		board.setAIBoardState(boardState);
+		//return new Move(new Coordinate(6,5), new Coordinate(5,5));
+		//console.log(NeuralNetwork.denormalizeMove( new Move(new Coordinate(6,5), new Coordinate(5,5)), board.turn * -1));
+
+		this.setInputWithNormalizedState(board.getNormalizedState(board.turn));
+		this.processInput();
+
+		// Get the best move as determined by the network.
+		const move: Move = this.evaluateOutput(board);
+
+		// TODO: Train the network.
+		// this.trainNetwork();
+
+		return move;
+	}
+
+	private setInputWithNormalizedState(normalizedState: number[]) {
+		// Flip the board if needed.
 
 		// Set the value of the input layer neurons.
 		for (let i = 1; i < this.inputLayer.neurons.length; ++i) {
-			this.inputLayer.neurons[i - 1].value = boardState[i];
+			this.inputLayer.neurons[i - 1].value = normalizedState[i];
 		}
+	}
+
+	private processInput() {
+		// Clear all the layers except the input layer.
+		for (const layer of this.hiddenLayers) {
+			layer.clear();
+		}
+		this.outputLayer.clear();
 
 		// Activate each of the layers in sequence.
 		this.inputLayer.activate();
+
 		for (let i = 0; i < this.hiddenLayers.length; ++i) {
+			if (i + 1 < this.hiddenLayers.length) {
+				this.hiddenLayers[i + 1].clear();
+			}
 			this.hiddenLayers[i].activate();
 		}
-		this.outputLayer.activate();
+	}
 
+	private evaluateOutput(board: AIBoard): Move {
 		// Evaluate the output layer to get an answer.
 		let move: Move = null;
 		let value = -1;
@@ -71,10 +111,15 @@ export class NeuralNetwork {
 
 				// Calculate the move coordinates.
 				const fromRow = Math.floor(i / 24);
-				const fromCol = i % 24;
+				const fromCol = Math.floor((i % 24) / 3);
 				const toRow = fromRow + 1;
 				const toCol = fromCol + i % 3 - 1;
-				const tempMove = new Move(new Coordinate(fromRow, fromCol), new Coordinate(toRow, toCol));
+
+				// Create the denormalized move.
+				const tempMove = NeuralNetwork.denormalizeMove(
+					new Move(new Coordinate(fromRow, fromCol), new Coordinate(toRow, toCol)),
+					board.turn
+				);
 
 				// Check if the move is a valid one.
 				if (board.isValidMove(tempMove)) {
@@ -84,14 +129,15 @@ export class NeuralNetwork {
 			}
 		}
 
+		return move;
+	}
+
+	private trainNetwork() {
 		// Train the network.
 		this.outputLayer.train();
 		for (let i = this.hiddenLayers.length - 1; i >= 0; --i) {
 			this.hiddenLayers[i].train();
 		}
 		this.inputLayer.train();
-
-		console.log(this);
-		return move;
 	}
 }
