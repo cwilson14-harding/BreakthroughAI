@@ -52,10 +52,11 @@ export class GameBoardComponent implements OnInit {
     this.board = new Board();
     this.board.newGame();
 
-    this.currentUserName = this.afAuth.auth.currentUser.displayName;
+    // this.currentUserName = this.afAuth.auth.currentUser.displayName;
     // this.board = db.collection('board').valueChanges();
     // Compare the user.uid field with the game.creatorId field.
     // this.games = this.db.collection('games', ref => ref.where('creatorName', '==', this.currentUserName));
+    gameService.newGame(new PlayerData('CJ', '', PlayerType.Local), new PlayerData('Jack', '', PlayerType.AI), '');
     this.games = this.db.collection('games').valueChanges();
     if (this.gameService.gameId !== '') {
       this.game = this.db.collection('games').doc<Game>(this.gameService.gameId);

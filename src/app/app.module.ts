@@ -36,7 +36,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { GuestInfoComponent } from './guest-info/guest-info.component';
 
 const appRoutes: Routes = [
-  { path: '', pathMatch: 'full', component: SplashScreenComponent},
+  { path: '', pathMatch: 'full', component: GameBoardComponent},
   { path: 'home', pathMatch: 'full', component: HomeComponent},
   { path: 'tutorial', pathMatch: 'full', component: TutorialComponent},
   { path: 'main-menu', pathMatch: 'full', component: MainMenuComponent},
@@ -49,7 +49,7 @@ const appRoutes: Routes = [
   { path: 'leaderboard', pathMatch: 'full', component: LeaderboardComponent},
   { path: 'sign-in', pathMatch: 'full', component: SignInComponent},
   { path: 'guest-info', pathMatch: 'full', component: GuestInfoComponent},
-  { path: '**', redirectTo: 'home'}
+  { path: '**', redirectTo: 'single-setup'}
 ];
 
 @NgModule({
