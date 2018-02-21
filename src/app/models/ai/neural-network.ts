@@ -134,11 +134,30 @@ export class NeuralNetwork {
 		return move;
 	}
 
-	private trainNetwork(learningRate: number, expectedOutput: number[]) {
-		// Train the network.
-		this.outputLayer.backpropogate(learningRate, expectedOutput);
-		for (let i = this.hiddenLayers.length - 1; i >= 0; --i) {
-			this.hiddenLayers[i].backpropogate(learningRate, expectedOutput);
+	trainCase(boardState: number[], expectedOutput: number[]) {
+		const board: AIBoard = new AIBoard();
+		board.setAIBoardState(boardState);
+
+		this.setInputWithNormalizedState(board.getNormalizedState(board.turn));
+		this.processInput();
+
+		this.adjustError(1, expectedOutput);
+	}
+
+	applyTraining() {
+		this.outputLayer.backpropogateError();
+	}
+
+	resetTraining() {
+		this.outputLayer.resetError();
+		for (const layer of this.hiddenLayers) {
+			layer.resetError();
 		}
+		this.inputLayer.resetError();
+	}
+
+	private adjustError(learningRate: number, expectedOutput: number[]) {
+		// Adjust the error calculations.
+		this.outputLayer.adjustError(learningRate, expectedOutput);
 	}
 }

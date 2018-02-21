@@ -32,7 +32,7 @@ export class Neuron {
 		}
 	}
 
-	backpropogate(learningRate: number, adjustment: number) {
+	private backpropogate(learningRate: number, adjustment: number) {
 		for (const synapse of this.leftSynapses) {
 			// TODO: Influence the values of the synapses.
 		}
