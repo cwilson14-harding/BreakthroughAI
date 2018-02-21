@@ -10,11 +10,14 @@ export class NeuralNetwork {
 	outputLayer: Layer;
 
 	constructor(path?: string) {
+		let t0: number;
 		if (path) {
+			console.log('Loading Neural Net from URL...');
+			t0 = performance.now();
 
 		} else {
 			console.log('Creating new Neural Net...');
-			const time: Date = new Date();
+			t0 = performance.now();
 			// Create randomized layers.
 
 			// 64 possible spaces with 3 possible moves each = 192.
@@ -39,9 +42,9 @@ export class NeuralNetwork {
 			} else {
 				this.inputLayer.connect(this.outputLayer);
 			}
-
-			console.log('Done. (' + (new Date() - time) + ' ms)');
 		}
+		const t1 = performance.now();
+		console.log('Done. (' + (t1 - t0) + ' ms)');
 	}
 
 	private static denormalizeMove(move: Move, turn: number): Move {
