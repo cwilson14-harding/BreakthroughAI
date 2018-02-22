@@ -37,12 +37,16 @@ export class AIProjectZen implements Player {
 				// Find the correct output state.
 				const targetIndex = move.fromIndex * 3;
 				// TODO: Normalize the move for output layer training purposes.
-
+				const tempBoard: AIBoard = new AIBoard();
+				tempBoard.setAIBoardState(board.getAIBoardState());
+				tempBoard.makeMove(move);
+				console.log(move);
 
 				// Train until the move is learned.
 				/*while (this.neuralNetwork.getMove(board.getAIBoardState()) !== move) {
-					this.neuralNetwork.trainCase(board.getAIBoardState(), targetIndex);
+					this.neuralNetwork.trainCase(board.getAIBoardState(), tempBoard.getNormalizedState(tempBoard.turn));
 					this.neuralNetwork.applyTraining(.1);
+					// OR WAIT TO APPLY TRAINING
 				}*/
 			}
 

@@ -114,13 +114,13 @@ export class GameBoardComponent implements OnInit {
 						//alert(winnerData.name + ' [' + winner + '] has won!');
 						// this.router.navigateByUrl(('main-menu'));
 
-						// Train the AI.
+						// Train the losing AI.
 						if (winner === 1) {
+							const ai2 = this.player2 as AIProjectZen;
+							ai2.train(this.history, false);
+						} else {
 							const ai1 = this.player1 as AIProjectZen;
 							ai1.train(this.history, true);
-						} else {
-							const ai2 = this.player1 as AIProjectZen;
-							ai2.train(this.history, false);
 						}
 					}, 1000);
 				} else {
