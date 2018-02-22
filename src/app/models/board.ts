@@ -89,6 +89,23 @@ export class Board {
 		}
 	}
 
+	setAIBoardState(state: number[]) {
+		this.playerTurn = (state[0] === -1) ? 1 : 2;
+		this.board = [];
+		for (let row = 0; row < Board.BOARD_SIZE; ++row) {
+			this.board[row] = [];
+			for (let col = 0; col < Board.BOARD_SIZE; ++col) {
+				if (state[(row * Board.BOARD_SIZE) + col + 1] === -1) {
+					this.board[row][col] = 1;
+				} else if (state[(row * Board.BOARD_SIZE) + col + 1] === 1) {
+					this.board[row][col] = 2;
+				} else {
+					this.board[row][col] = 0;
+				}
+			}
+		}
+	}
+
 	/* isLocationValid: function(){}
 	 Parameters: location: [number, number]
 	 The parameter location is a tuple that contains two numbers. These numbers are the x and y

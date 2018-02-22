@@ -78,8 +78,6 @@ export class NeuralNetwork {
 	}
 
 	private setInputWithNormalizedState(normalizedState: number[]) {
-		// Flip the board if needed.
-
 		// Set the value of the input layer neurons.
 		for (let i = 1; i < this.inputLayer.neurons.length; ++i) {
 			this.inputLayer.neurons[i - 1].value = normalizedState[i];

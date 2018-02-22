@@ -52,6 +52,7 @@ export class GameBoardComponent implements OnInit {
 	constructor(public db: AngularFirestore, private router: Router, public auth: AuthService, public afAuth: AngularFireAuth, private gameService: GameService) {
 		this.board = new Board();
 		this.board.newGame();
+		console.log(this.board);
 
 		// this.currentUserName = this.afAuth.auth.currentUser.displayName;
 		// this.board = db.collection('board').valueChanges();
