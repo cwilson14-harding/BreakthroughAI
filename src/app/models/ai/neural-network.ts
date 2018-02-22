@@ -21,7 +21,7 @@ export class NeuralNetwork {
 			t0 = performance.now();
 			// Create randomized layers.
 
-			// 64 possible spaces with 3 possible moves each = 192.
+			// Board size.
 			this.inputLayer = new Layer(64);
 
 			// Mean number of input and output layers.
@@ -29,6 +29,7 @@ export class NeuralNetwork {
 				new Layer(60),
 				new Layer(60)];
 
+			// 64 possible spaces with 3 possible moves each - last layer (end state, can't move from) = 168.
 			this.outputLayer = new Layer(168);
 
 			// Connect the layers.

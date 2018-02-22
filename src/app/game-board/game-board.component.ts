@@ -6,7 +6,6 @@ import {AuthService, Game, User} from '../core/auth.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import {Player} from '../models/player';
 import {LocalPlayer} from '../models/local-player';
-import {AIPlayer} from '../models/ai-player';
 import { GameService } from '../game.service';
 import {PlayerData, PlayerType} from '../player-data';
 import {Board} from '../models/board';
@@ -14,8 +13,7 @@ import {NetworkPlayer} from '../models/network-player';
 import {Move} from '../models/move';
 import {Router} from '@angular/router';
 import {HostListener} from '@angular/core';
-import { ToolbarComponent } from '../toolbar/toolbar.component';
-import {AIPlayer2} from '../models/ai-player2';
+import {AIProjectZen} from '../models/ai-player2';
 
 @Component({
 	selector: 'app-game-board',
@@ -34,6 +32,7 @@ export class GameBoardComponent implements OnInit {
 	board: Board;
 	pauseBackgroundMusic: boolean;
 	playBackgroundMusic: boolean;
+	history: Move[] = [];
 	@HostListener('document: keypress', ['$event'])
 	playPauseBackgroundMusic(event: KeyboardEvent) {
 		const audio = document.getElementById('audioPlayer') as any;
@@ -71,13 +70,13 @@ export class GameBoardComponent implements OnInit {
 		const p2 = this.gameService.playerTwo;
 
 		switch (p1.type) {
-			case PlayerType.AI: this.player1 = new AIPlayer2(); break;
+			case PlayerType.AI: this.player1 = new AIProjectZen(); break;
 			case PlayerType.Local: this.player1 = new LocalPlayer(1); break;
 			case PlayerType.Network: this.player1 = new NetworkPlayer(this.game); break;
 		}
 
 		switch (p2.type) {
-			case PlayerType.AI: this.player2 = new AIPlayer2(); break;
+			case PlayerType.AI: this.player2 = new AIProjectZen(); break;
 			case PlayerType.Local: this.player2 = new LocalPlayer(2); break;
 			case PlayerType.Network: this.player2 = new NetworkPlayer(this.game); break;
 		}
@@ -98,6 +97,7 @@ export class GameBoardComponent implements OnInit {
 			movePromise.then((move: Move) => {
 				// Make the move on the game board.
 				this.board.makeMove(move);
+				this.history.push(move);
 
 				// Reset highlighting
 				this.board.clearHighlighting();
@@ -113,6 +113,15 @@ export class GameBoardComponent implements OnInit {
 						// TODO: Go to game over screen.
 						//alert(winnerData.name + ' [' + winner + '] has won!');
 						// this.router.navigateByUrl(('main-menu'));
+
+						// Train the AI.
+						if (winner === 1) {
+							const ai1 = this.player1 as AIProjectZen;
+							ai1.train(this.history, true);
+						} else {
+							const ai2 = this.player1 as AIProjectZen;
+							ai2.train(this.history, false);
+						}
 					}, 1000);
 				} else {
 					this.getMove();
@@ -136,18 +145,19 @@ export class GameBoardComponent implements OnInit {
 	newGameClicked() {
 		// Initialize variables.
 		this.board.newGame();
+		this.history = [];
 
-		if (this.player1 instanceof LocalPlayer) {
+		/*if (this.player1 instanceof LocalPlayer) {
 			this.player1 = new LocalPlayer(1);
-		} else if (this.player1 instanceof AIPlayer2) {
-			this.player1 = new AIPlayer2();
+		} else if (this.player1 instanceof AIProjectZen) {
+			this.player1 = new AIProjectZen();
 		}
 
 		if (this.player2 instanceof LocalPlayer) {
 			this.player2 = new LocalPlayer(2);
-		} else if (this.player2 instanceof AIPlayer2) {
-			this.player2 = new AIPlayer2();
-		}
+		} else if (this.player2 instanceof AIProjectZen) {
+			this.player2 = new AIProjectZen();
+		}*/
 
 		// Start the game.
 		this.getMove();
