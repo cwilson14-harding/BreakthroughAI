@@ -48,7 +48,7 @@ export class NeuralNetwork {
 		console.log(this);
 	}
 
-	private static denormalizeMove(move: Move, turn: number): Move {
+	static denormalizeMove(move: Move, turn: number): Move {
 		if (turn === -1) {
 			return move;
 		} else {

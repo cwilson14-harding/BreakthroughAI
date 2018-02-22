@@ -91,4 +91,54 @@ describe('AIBoard', () => {
 		const case2 = board.makeMove(move);
 		expect(case1 || case2).toBeFalsy();
 	}));
+
+	it('should output a correct normalized board for player 1', inject([], () => {
+		const board: AIBoard = new AIBoard();
+		board.newGame();
+		board.setAIBoardState([-1,
+			-1,-1,-1,-1,-1,-1,-1,-1,
+			-1,-1,-1,-1,-1,-1,-1,0,
+			0,0,0,0,0,0,0,0,
+			0,0,0,0,0,0,0,0,
+			0,0,0,0,0,0,0,0,
+			0,0,0,0,0,0,0,0,
+			1,1,1,1,1,1,-1,1,
+			1,1,1,1,1,1,1,1
+		]);
+		expect(board.getNormalizedState(-1)).toEqual([1,
+			1,1,1,1,1,1,1,1,
+			1,1,1,1,1,1,1,0,
+			0,0,0,0,0,0,0,0,
+			0,0,0,0,0,0,0,0,
+			0,0,0,0,0,0,0,0,
+			0,0,0,0,0,0,0,0,
+			2,2,2,2,2,2,1,2,
+			2,2,2,2,2,2,2,2
+		]);
+	}));
+
+	it('should output a correct normalized board for player 2', inject([], () => {
+		const board: AIBoard = new AIBoard();
+		board.newGame();
+		board.setAIBoardState([1,
+			-1,-1,-1,-1,-1,-1,-1,-1,
+			-1,-1,-1,-1,-1,-1,-1,1,
+			0,0,0,0,0,0,0,0,
+			0,0,0,0,0,0,0,0,
+			0,0,0,0,0,0,0,0,
+			0,0,0,0,0,0,0,0,
+			1,1,1,1,1,1,1,0,
+			1,1,1,1,1,1,1,1
+		]);
+		expect(board.getNormalizedState(1)).toEqual([1,
+			1,1,1,1,1,1,1,1,
+			0,1,1,1,1,1,1,1,
+			0,0,0,0,0,0,0,0,
+			0,0,0,0,0,0,0,0,
+			0,0,0,0,0,0,0,0,
+			0,0,0,0,0,0,0,0,
+			1,2,2,2,2,2,2,2,
+			2,2,2,2,2,2,2,2
+		]);
+	}));
 });

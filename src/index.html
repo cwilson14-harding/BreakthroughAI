@@ -11,7 +11,85 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="assets/scripts/jquery.min.js"></script>
   <script src="assets/scripts/mouse.parallax.js"></script>
+  <script>
+    // Tools for working on the AI.
+	  cases = [
+		  [[-1,
+			  -1,-1,-1,-1,-1,-1,-1,-1,
+			  -1,-1,-1,-1,-1,-1,-1,0,
+			  0,0,0,0,0,0,0,0,
+			  0,0,0,0,0,0,0,0,
+			  0,0,0,0,0,0,0,0,
+			  0,0,0,0,0,0,0,0,
+			  1,1,1,1,1,1,-1,1,
+			  1,1,1,1,1,1,1,1
+		  ],[
+			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,
+			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+		  ]],
+		  [[1,
+			  -1,-1,-1,-1,-1,-1,-1,-1,
+			  -1,-1,-1,-1,-1,-1,-1,1,
+			  0,0,0,0,0,0,0,0,
+			  0,0,0,0,0,0,0,0,
+			  0,0,0,0,0,0,0,0,
+			  0,0,0,0,0,0,0,0,
+			  1,1,1,1,1,1,1,0,
+			  1,1,1,1,1,1,1,1
+		  ],[
+			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,
+			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+		  ]]
+	  ];
 
+	  function train() {
+		  temp1.resetTraining();
+		  for (var i = 0; i < cases.length; ++i)
+			  temp1.trainCase(...cases[i]);
+		  temp1.applyTraining(.2);
+	  }
+
+	  function log() {
+		  console.log(temp1.outputLayer.neurons[0].leftSynapses[0]);
+	  }
+
+	  function logNodes() {
+		  var values = [];
+		  values.length = temp1.outputLayer.neurons.length;
+		  for (var i = 0; i < temp1.outputLayer.neurons.length; ++i) {
+			  values[i] = 0;
+			  for (var j = 0; j < temp1.outputLayer.neurons[i].leftSynapses.length; ++j) {
+				  values[i] += temp1.outputLayer.neurons[i].leftSynapses[j].weight;
+			  }
+		  }
+		  console.log(values);
+	  }
+
+	  function playCase(i) {
+		  temp2.setAIBoardState(cases[i][0]);
+	  }
+
+	  function getMove() {
+		  return temp1.getMove(temp2.getAIBoardState());
+	  }
+
+	  function playMove() {
+		  return temp2.makeMove(getMove());
+	  }
+
+  </script>
 </head>
 <body>
   <app-root></app-root>
