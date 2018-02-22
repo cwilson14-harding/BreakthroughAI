@@ -43,14 +43,7 @@
 			  1,1,1,1,1,1,1,0,
 			  1,1,1,1,1,1,1,1
 		  ],[
-			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,
-			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+		  	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 		  ]]
 	  ];
 
@@ -79,6 +72,7 @@
 
 	  function playCase(i) {
 		  temp2.setAIBoardState(cases[i][0]);
+		  temp1.aiBoard.setAIBoardState(cases[i][0]);
 	  }
 
 	  function getMove() {
@@ -88,6 +82,43 @@
 	  function playMove() {
 		  return temp2.makeMove(getMove());
 	  }
+
+	  function showMove(index) {
+        return temp1.showMove(index);
+      }
+
+	function showValidMove(index) {
+		return temp1.showValidMove(index);
+	}
+
+	function showAllValidMoves() {
+	  	for (var i = 0; i < temp1.outputLayer.neurons.length; ++i) {
+	      var move = showValidMove(i);
+	      if (move) console.log(i);
+	    }
+    }
+
+      function showNormalizedBoard() {
+	  	return temp1.aiBoard.getNormalizedState(temp1.aiBoard.turn);
+      }
+
+      function copySolution(index) {
+	  	for (var i = 0; i < temp1.outputLayer.neurons.length; ++i) {
+	  		temp1.outputLayer.neurons[i].value = cases[index][1][i];
+        }
+      }
+
+      function updateAIBoard() {
+		  temp1.aiBoard.setAIBoardState(temp2.getAIBoardState());
+      }
+
+      function getOutputLayer() {
+	  	var a = [];
+	  	for (var i = 0; i < temp1.outputLayer.neurons.length; ++i) {
+	  		a.push(temp1.outputLayer.neurons[i].value);
+        }
+        return a;
+      }
 
   </script>
 </head>

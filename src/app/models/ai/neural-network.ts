@@ -8,6 +8,7 @@ export class NeuralNetwork {
 	inputLayer: Layer;
 	hiddenLayers: Layer[];
 	outputLayer: Layer;
+	aiBoard: AIBoard = new AIBoard();
 
 	constructor(path?: string) {
 		let t0: number;
@@ -28,7 +29,7 @@ export class NeuralNetwork {
 				new Layer(60),
 				new Layer(60)];
 
-			this.outputLayer = new Layer(192);
+			this.outputLayer = new Layer(168);
 
 			// Connect the layers.
 			this.inputLayer.connect(this.hiddenLayers[0]);
@@ -54,10 +55,42 @@ export class NeuralNetwork {
 		} else {
 			const fromRow = move.from.row * -1 + 7;
 			const fromCol =  move.from.column * -1 + 7;
-			const toRow = move.to.row * -1 + 7;
+			const toRow = move.to.row * -1 + 5;
 			const toCol = move.to.column * -1 + 7;
 			return new Move(new Coordinate(fromRow, fromCol), new Coordinate(toRow, toCol));
 		}
+	}
+
+	showMove(i: number) {
+		// Calculate the move coordinates.
+		const fromRow = Math.floor(i / 24);
+		const fromCol = Math.floor((i % 24) / 3);
+		const toRow = fromRow + this.aiBoard.turn * -1;
+		const toCol = fromCol + i % 3 - 1;
+
+		// Create the denormalized move.
+		const tempMove = NeuralNetwork.denormalizeMove(
+			new Move(new Coordinate(fromRow, fromCol), new Coordinate(toRow, toCol)),
+			this.aiBoard.turn
+		);
+
+		return tempMove;
+	}
+
+	showValidMove(i: number) {
+		// Calculate the move coordinates.
+		const fromRow = Math.floor(i / 24);
+		const fromCol = Math.floor((i % 24) / 3);
+		const toRow = fromRow + this.aiBoard.turn * -1;
+		const toCol = fromCol + i % 3 - 1;
+
+		// Create the denormalized move.
+		const tempMove = NeuralNetwork.denormalizeMove(
+			new Move(new Coordinate(fromRow, fromCol), new Coordinate(toRow, toCol)),
+			this.aiBoard.turn
+		);
+
+		return (this.aiBoard.isValidMove(tempMove)) ? tempMove : null;
 	}
 
 	getMove(boardState: number[]): Move {
@@ -65,21 +98,17 @@ export class NeuralNetwork {
 		const board: AIBoard = new AIBoard();
 		board.setAIBoardState(boardState);
 
+		// Run the input through the network.
 		this.setInputWithNormalizedState(board.getNormalizedState(board.turn));
 		this.processInput();
 
 		// Get the best move as determined by the network.
-		const move: Move = this.evaluateOutput(board);
-
-		// TODO: Train the network.
-		// this.trainNetwork();
-
-		return move;
+		return this.evaluateOutput(board);
 	}
 
-	private setInputWithNormalizedState(normalizedState: number[]) {
+	setInputWithNormalizedState(normalizedState: number[]) {
 		// Set the value of the input layer neurons.
-		for (let i = 1; i < this.inputLayer.neurons.length; ++i) {
+		for (let i = 1; i <= this.inputLayer.neurons.length; ++i) {
 			this.inputLayer.neurons[i - 1].value = normalizedState[i];
 		}
 	}
@@ -113,7 +142,7 @@ export class NeuralNetwork {
 				// Calculate the move coordinates.
 				const fromRow = Math.floor(i / 24);
 				const fromCol = Math.floor((i % 24) / 3);
-				const toRow = fromRow + 1;
+				const toRow = fromRow + board.turn * -1;
 				const toCol = fromCol + i % 3 - 1;
 
 				// Create the denormalized move.

@@ -58,7 +58,10 @@ export class GameBoardComponent implements OnInit {
 		// this.board = db.collection('board').valueChanges();
 		// Compare the user.uid field with the game.creatorId field.
 		// this.games = this.db.collection('games', ref => ref.where('creatorName', '==', this.currentUserName));
-		gameService.newGame(new PlayerData('CJ', '', PlayerType.Local), new PlayerData('Jack', '', PlayerType.AI), '');
+		gameService.newGame(
+			new PlayerData('CJ', '', PlayerType.AI),
+			new PlayerData('Jack', '', PlayerType.AI),
+			'');
 		this.games = this.db.collection('games').valueChanges();
 		if (this.gameService.gameId !== '') {
 			this.game = this.db.collection('games').doc<Game>(this.gameService.gameId);
@@ -108,7 +111,7 @@ export class GameBoardComponent implements OnInit {
 					setTimeout(() => {
 						// this.router.navigateByUrl(('game-over'));
 						// TODO: Go to game over screen.
-						alert(winnerData.name + ' [' + winner + '] has won!');
+						//alert(winnerData.name + ' [' + winner + '] has won!');
 						// this.router.navigateByUrl(('main-menu'));
 					}, 1000);
 				} else {
@@ -130,20 +133,20 @@ export class GameBoardComponent implements OnInit {
 		}
 	}
 
-	newGameClicked(Null: null) {
+	newGameClicked() {
 		// Initialize variables.
 		this.board.newGame();
 
 		if (this.player1 instanceof LocalPlayer) {
 			this.player1 = new LocalPlayer(1);
-		} else if (this.player1 instanceof AIPlayer) {
-			this.player1 = new AIPlayer();
+		} else if (this.player1 instanceof AIPlayer2) {
+			this.player1 = new AIPlayer2();
 		}
 
 		if (this.player2 instanceof LocalPlayer) {
 			this.player2 = new LocalPlayer(2);
-		} else if (this.player2 instanceof AIPlayer) {
-			this.player2 = new AIPlayer();
+		} else if (this.player2 instanceof AIPlayer2) {
+			this.player2 = new AIPlayer2();
 		}
 
 		// Start the game.
