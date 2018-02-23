@@ -10,40 +10,40 @@ export class NeuralNetwork {
 	outputLayer: Layer;
 	//aiBoard: AIBoard = new AIBoard();
 
-	constructor(path?: string) {
+	constructor(network?: number[]) {
 		let t0: number;
-		if (path) {
-			console.log('Loading Neural Net from URL...');
-			t0 = performance.now();
+		console.log('Creating new Neural Net...');
+		t0 = performance.now();
+		// Create randomized layers.
 
+		// Board size.
+		this.inputLayer = new Layer(64);
+
+		// Mean number of input and output layers.
+		this.hiddenLayers = [
+			new Layer(60),
+			new Layer(60)];
+
+		// 64 possible spaces with 3 possible moves each - last layer (end state, can't move from) = 168.
+		this.outputLayer = new Layer(168);
+
+		// Connect the layers.
+		this.inputLayer.connect(this.hiddenLayers[0]);
+		for (let i = 0; i < this.hiddenLayers.length - 1; ++i) {
+			this.hiddenLayers[i].connect(this.hiddenLayers[i + 1]);
+		}
+
+		// Connect to the output layer.
+		if (this.hiddenLayers.length > 0) {
+			this.hiddenLayers[this.hiddenLayers.length - 1].connect(this.outputLayer);
 		} else {
-			console.log('Creating new Neural Net...');
-			t0 = performance.now();
-			// Create randomized layers.
+			this.inputLayer.connect(this.outputLayer);
+		}
 
-			// Board size.
-			this.inputLayer = new Layer(64);
-
-			// Mean number of input and output layers.
-			this.hiddenLayers = [
-				new Layer(60),
-				new Layer(60)];
-
-			// 64 possible spaces with 3 possible moves each - last layer (end state, can't move from) = 168.
-			this.outputLayer = new Layer(168);
-
-			// Connect the layers.
-			this.inputLayer.connect(this.hiddenLayers[0]);
-			for (let i = 0; i < this.hiddenLayers.length - 1; ++i) {
-				this.hiddenLayers[i].connect(this.hiddenLayers[i + 1]);
-			}
-
-			// Connect to the output layer.
-			if (this.hiddenLayers.length > 0) {
-				this.hiddenLayers[this.hiddenLayers.length - 1].connect(this.outputLayer);
-			} else {
-				this.inputLayer.connect(this.outputLayer);
-			}
+		// Load the network, if given..
+		if (network) {
+			console.log(network.length);
+			this.loadNetwork(network);
 		}
 		const t1 = performance.now();
 		console.log('Done. (' + (t1 - t0) + ' ms)');

@@ -15,6 +15,7 @@ import {Router} from '@angular/router';
 import {HostListener} from '@angular/core';
 import {AIProjectZen} from '../models/ai-player2';
 import {NeuralNetwork} from '../models/ai/neural-network';
+import {ProjectZenCore} from '../models/ai/project-zen-core';
 
 @Component({
 	selector: 'app-game-board',
@@ -34,7 +35,7 @@ export class GameBoardComponent implements OnInit {
 	pauseBackgroundMusic: boolean;
 	playBackgroundMusic: boolean;
 	history: Move[] = [];
-	neuralNetwork: NeuralNetwork = new NeuralNetwork();
+	neuralNetwork: NeuralNetwork = new NeuralNetwork(new ProjectZenCore().PROJECT_ZEN_CORE);
 	@HostListener('document: keypress', ['$event'])
 	playPauseBackgroundMusic(event: KeyboardEvent) {
 		const audio = document.getElementById('audioPlayer') as any;
