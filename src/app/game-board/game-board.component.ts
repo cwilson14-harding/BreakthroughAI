@@ -13,10 +13,10 @@ import {NetworkPlayer} from '../models/network-player';
 import {Move} from '../models/move';
 import {Router} from '@angular/router';
 import {HostListener} from '@angular/core';
-import {AIProjectZen} from '../models/ai-player2';
+import {AIProjectZen} from '../models/ai-project-zen';
 import {NeuralNetwork} from '../models/ai/neural-network';
 import {ProjectZenCore} from '../models/ai/project-zen-core';
-import {AIPlayer} from '../models/ai-player';
+import {AIMCTSProjectZen} from '../models/ai-mcts-project-zen';
 
 @Component({
 	selector: 'app-game-board',
@@ -70,20 +70,7 @@ export class GameBoardComponent implements OnInit {
 			this.game = this.db.collection('games').doc<Game>(this.gameService.gameId);
 		}
 
-		const p1 = this.gameService.playerOne;
-		const p2 = this.gameService.playerTwo;
-
-		switch (p1.type) {
-			case PlayerType.AI: this.player1 = new AIProjectZen(this.neuralNetwork); break;
-			case PlayerType.Local: this.player1 = new LocalPlayer(1); break;
-			case PlayerType.Network: this.player1 = new NetworkPlayer(this.game); break;
-		}
-
-		switch (p2.type) {
-			case PlayerType.AI: this.player2 = new AIProjectZen(this.neuralNetwork); break;
-			case PlayerType.Local: this.player2 = new LocalPlayer(2); break;
-			case PlayerType.Network: this.player2 = new NetworkPlayer(this.game); break;
-		}
+		this.newGame();
 
 		this.getMove();
 
@@ -135,6 +122,23 @@ export class GameBoardComponent implements OnInit {
 		}
 	}
 
+	newGame() {
+		const p1 = this.gameService.playerOne;
+		const p2 = this.gameService.playerTwo;
+
+		switch (p1.type) {
+			case PlayerType.AI: this.player1 = new AIMCTSProjectZen(this.neuralNetwork); break;
+			case PlayerType.Local: this.player1 = new LocalPlayer(1); break;
+			case PlayerType.Network: this.player1 = new NetworkPlayer(this.game); break;
+		}
+
+		switch (p2.type) {
+			case PlayerType.AI: this.player2 = new AIMCTSProjectZen(this.neuralNetwork); break;
+			case PlayerType.Local: this.player2 = new LocalPlayer(2); break;
+			case PlayerType.Network: this.player2 = new NetworkPlayer(this.game); break;
+		}
+	}
+
 	trainClicked() {
 		this.neuralNetwork.resetTraining();
 		for (const trainingCase of ProjectZenCore.PROJECT_ZEN_TRAINING) {
@@ -163,6 +167,7 @@ export class GameBoardComponent implements OnInit {
 		// Initialize variables.
 		this.board.newGame();
 		this.history = [];
+		this.newGame();
 
 		/*if (this.player1 instanceof LocalPlayer) {
 			this.player1 = new LocalPlayer(1);
