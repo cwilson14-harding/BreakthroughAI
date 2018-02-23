@@ -17,6 +17,9 @@ import {AIProjectZen} from '../models/ai-project-zen';
 import {NeuralNetwork} from '../models/ai/neural-network';
 import {ProjectZenCore} from '../models/ai/project-zen-core';
 import {AIMCTSProjectZen} from '../models/ai-mcts-project-zen';
+import {MCTSRandom} from '../models/ai/mcts-random/mcts-random';
+import {AIPlayerMCTSRandom} from '../models/ai-player-mcts-random';
+import {AIPlayerMCTSDefensive} from '../models/ai-player-mcts-def';
 
 @Component({
 	selector: 'app-game-board',
@@ -133,7 +136,16 @@ export class GameBoardComponent implements OnInit {
 		}
 
 		switch (p2.type) {
-			case PlayerType.AI: this.player2 = new AIProjectZen(this.neuralNetwork); break;
+			case PlayerType.AI:
+				switch (Math.floor(Math.random() * 6)) {
+					case 0: this.player2 = new AIProjectZen(this.neuralNetwork); break;
+					case 1: this.player2 = new AIProjectZen(); break;
+					case 2: this.player2 = new AIMCTSProjectZen(this.neuralNetwork); break;
+					case 3: this.player2 = new AIMCTSProjectZen(); break;
+					case 4: this.player2 = new AIPlayerMCTSRandom(); break;
+					case 5: this.player2 = new AIPlayerMCTSDefensive(); break;
+				}
+				break;
 			case PlayerType.Local: this.player2 = new LocalPlayer(2); break;
 			case PlayerType.Network: this.player2 = new NetworkPlayer(this.game); break;
 		}
