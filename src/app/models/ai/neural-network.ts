@@ -94,6 +94,21 @@ export class NeuralNetwork {
 		return (this.aiBoard.isValidMove(tempMove)) ? tempMove : null;
 	}
 
+	getValidMoveFromOutputIndex(i: number, aiBoard: AIBoard) {
+		const fromRow = Math.floor(i / 24);
+		const fromCol = Math.floor((i % 24) / 3);
+		const toRow = fromRow + this.aiBoard.turn * -1;
+		const toCol = fromCol + i % 3 - 1;
+
+		// Create the denormalized move.
+		const tempMove = NeuralNetwork.denormalizeMove(
+			new Move(new Coordinate(fromRow, fromCol), new Coordinate(toRow, toCol)),
+			this.aiBoard.turn
+		);
+
+		return (aiBoard.isValidMove(tempMove)) ? tempMove : null;
+	}
+
 	getMove(boardState: number[]): Move {
 		// Create a board with the given state.
 		const board: AIBoard = new AIBoard();
@@ -109,8 +124,8 @@ export class NeuralNetwork {
 
 	setInputWithNormalizedState(normalizedState: number[]) {
 		// Set the value of the input layer neurons.
-		for (let i = 1; i <= this.inputLayer.neurons.length; ++i) {
-			this.inputLayer.neurons[i - 1].value = normalizedState[i];
+		for (let i = 0; i < this.inputLayer.neurons.length; ++i) {
+			this.inputLayer.neurons[i].value = normalizedState[i];
 		}
 	}
 
@@ -164,6 +179,7 @@ export class NeuralNetwork {
 	}
 
 	trainGame(history: Move[], observeFirst: boolean) {
+		console.log('Training game...');
 		const board: AIBoard = new AIBoard();
 		board.newGame();
 		let observe = observeFirst;
@@ -171,15 +187,24 @@ export class NeuralNetwork {
 		for (const move of history) {
 			if (observe) {
 				// Find the correct output state.
-				const targetIndex = move.fromIndex * 3;
+				/*const targetIndex = move.fromIndex * 3;
 				// TODO: Normalize the move for output layer training purposes.
 				const tempBoard: AIBoard = new AIBoard();
 				tempBoard.setAIBoardState(board.getAIBoardState());
-				tempBoard.makeMove(move);
+				tempBoard.makeMove(move);*/
+				const targetOutput = [];
+				targetOutput.length = this.outputLayer.neurons.length;
+				for (let i = 0; i < this.outputLayer.neurons.length; ++i) {
+					const tempMove = this.getValidMoveFromOutputIndex(i, board);
+					if (tempMove && move.to.row === tempMove.to.row && move.to.column === tempMove.to.column) {
+						targetOutput[i] = 1;
+					} else {
+						targetOutput[i] = 0;
+					}
+				}
 
 				// Train until the move is learned.
-
-				this.trainCase(board.getAIBoardState(), tempBoard.getNormalizedState(tempBoard.turn));
+				this.trainCase(board.getAIBoardState(), targetOutput);
 
 				// OR WAIT TO APPLY TRAINING
 				count++;

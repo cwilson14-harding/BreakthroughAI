@@ -16,6 +16,7 @@ import {HostListener} from '@angular/core';
 import {AIProjectZen} from '../models/ai-player2';
 import {NeuralNetwork} from '../models/ai/neural-network';
 import {ProjectZenCore} from '../models/ai/project-zen-core';
+import {AIPlayer} from '../models/ai-player';
 
 @Component({
 	selector: 'app-game-board',
@@ -61,8 +62,8 @@ export class GameBoardComponent implements OnInit {
 		// Compare the user.uid field with the game.creatorId field.
 		// this.games = this.db.collection('games', ref => ref.where('creatorName', '==', this.currentUserName));
 		gameService.newGame(
-			new PlayerData('CJ', '', PlayerType.Local),
-			new PlayerData('Jack', '', PlayerType.Local),
+			new PlayerData('CJ', '', PlayerType.AI),
+			new PlayerData('Jack', '', PlayerType.AI),
 			'');
 		this.games = this.db.collection('games').valueChanges();
 		if (this.gameService.gameId !== '') {
@@ -73,13 +74,13 @@ export class GameBoardComponent implements OnInit {
 		const p2 = this.gameService.playerTwo;
 
 		switch (p1.type) {
-			case PlayerType.AI: this.player1 = new AIProjectZen(); break;
+			case PlayerType.AI: this.player1 = new AIProjectZen(this.neuralNetwork); break;
 			case PlayerType.Local: this.player1 = new LocalPlayer(1); break;
 			case PlayerType.Network: this.player1 = new NetworkPlayer(this.game); break;
 		}
 
 		switch (p2.type) {
-			case PlayerType.AI: this.player2 = new AIProjectZen(); break;
+			case PlayerType.AI: this.player2 = new AIProjectZen(this.neuralNetwork); break;
 			case PlayerType.Local: this.player2 = new LocalPlayer(2); break;
 			case PlayerType.Network: this.player2 = new NetworkPlayer(this.game); break;
 		}

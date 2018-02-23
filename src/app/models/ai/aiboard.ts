@@ -109,7 +109,7 @@ export class AIBoard {
 	getNormalizedState(team: number): number[] {
 		// Returns the state from the given perspective, which normalizes it.
 		if (team === -1) {
-			const result: number[] = [1];
+			const result: number[] = [];
 			for (let i = 0; i < this.board.length; ++i) {
 				if (this.board[i] === -1) {
 					result.push(1);
@@ -121,7 +121,7 @@ export class AIBoard {
 			}
 			return result;
 		} else {
-			const result: number[] = [1];
+			const result: number[] = [];
 			for (let i = this.board.length - 1; i >= 0; --i) {
 				if (this.board[i] === -1) {
 					result.push(2);

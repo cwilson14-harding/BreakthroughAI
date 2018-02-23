@@ -4,15 +4,17 @@ import {Move} from './move';
 import {MCTS} from './ai/mcts';
 import {NeuralNetwork} from './ai/neural-network';
 import {AIBoard} from './ai/aiboard';
+import {ProjectZenCore} from './ai/project-zen-core';
 
 export class AIProjectZen implements Player {
 	board: GameBoardComponent;
 	private resolve: Function;
 	private reject: Function;
-	// private mcts: MCTS = new MCTS();
-	private neuralNetwork = new NeuralNetwork();
+	neuralNetwork: NeuralNetwork;
 
-	constructor() {}
+	constructor(network?: NeuralNetwork) {
+		this.neuralNetwork = (network) ? network : new NeuralNetwork(ProjectZenCore.PROJECT_ZEN_CORE);
+	}
 
 	getMove(board: GameBoardComponent): Promise<Move> {
 		return new Promise<Move>((resolve, reject) => {
@@ -26,37 +28,5 @@ export class AIProjectZen implements Player {
 				this.reject();
 			}}, 100);
 		});
-	}
-
-	train(history: Move[], wentFirst: boolean) {
-		const board: AIBoard = new AIBoard();
-		board.newGame();
-		let observe = !wentFirst;
-		let count = 0;
-		while (count < 5) {
-		for (const move of history) {
-			if (observe) {
-				// Find the correct output state.
-				const targetIndex = move.fromIndex * 3;
-				// TODO: Normalize the move for output layer training purposes.
-				const tempBoard: AIBoard = new AIBoard();
-				tempBoard.setAIBoardState(board.getAIBoardState());
-				tempBoard.makeMove(move);
-				//console.log(move);
-
-				// Train until the move is learned.
-
-				this.neuralNetwork.trainCase(board.getAIBoardState(), tempBoard.getNormalizedState(tempBoard.turn));
-
-				// OR WAIT TO APPLY TRAINING
-				count++;
-			}
-			board.makeMove(move);
-			observe = !observe;
-			}
-			this.neuralNetwork.applyTraining(.1);
-			this.neuralNetwork.resetTraining();
-			console.log('done');
-		}
 	}
 }
