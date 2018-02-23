@@ -41,9 +41,11 @@ export class NeuralNetwork {
 		}
 
 		// Load the network, if given..
-		if (network) {
+		if (network && network.length > 0) {
 			console.log(network.length);
 			this.loadNetwork(network);
+		} else {
+			console.log('No core found, using random weights.');
 		}
 		const t1 = performance.now();
 		console.log('Done. (' + (t1 - t0) + ' ms)');

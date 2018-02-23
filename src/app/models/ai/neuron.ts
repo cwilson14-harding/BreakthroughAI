@@ -3,7 +3,20 @@ import {Synapse} from './synapse';
 export class Neuron {
 	leftSynapses: Synapse[] = [];
 	rightSynapses: Synapse[] = [];
-	public value = 0;
+	countedValue = 0;
+	count = 0;
+	get value(): number {
+		return (this.count !== 0) ? this.countedValue / this.count : 0;
+	}
+	set value(value: number) {
+		if (value !== 0) {
+			this.countedValue = value;
+			this.count = 1;
+		} else {
+			this.countedValue = 0;
+			this.count = 0;
+		}
+	}
 
 	constructor() {}
 
@@ -26,7 +39,8 @@ export class Neuron {
 	activate() {
 		for (const synapse of this.rightSynapses) {
 			const targetNeuron = synapse.rightNeuron;
-			targetNeuron.value += this.value * synapse.weight;
+			targetNeuron.countedValue += this.value * synapse.weight;
+			targetNeuron.count++;
 		}
 	}
 }
