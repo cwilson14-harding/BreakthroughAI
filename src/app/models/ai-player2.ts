@@ -32,6 +32,8 @@ export class AIProjectZen implements Player {
 		const board: AIBoard = new AIBoard();
 		board.newGame();
 		let observe = !wentFirst;
+		let count = 0;
+		while (count < 5) {
 		for (const move of history) {
 			if (observe) {
 				// Find the correct output state.
@@ -40,18 +42,21 @@ export class AIProjectZen implements Player {
 				const tempBoard: AIBoard = new AIBoard();
 				tempBoard.setAIBoardState(board.getAIBoardState());
 				tempBoard.makeMove(move);
-				console.log(move);
+				//console.log(move);
 
 				// Train until the move is learned.
-				/*while (this.neuralNetwork.getMove(board.getAIBoardState()) !== move) {
-					this.neuralNetwork.trainCase(board.getAIBoardState(), tempBoard.getNormalizedState(tempBoard.turn));
-					this.neuralNetwork.applyTraining(.1);
-					// OR WAIT TO APPLY TRAINING
-				}*/
-			}
 
+				this.neuralNetwork.trainCase(board.getAIBoardState(), tempBoard.getNormalizedState(tempBoard.turn));
+
+				// OR WAIT TO APPLY TRAINING
+				count++;
+			}
 			board.makeMove(move);
 			observe = !observe;
+			}
+			this.neuralNetwork.applyTraining(.1);
+			this.neuralNetwork.resetTraining();
+			console.log('done');
 		}
 	}
 }

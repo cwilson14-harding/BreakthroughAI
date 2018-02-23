@@ -8,7 +8,7 @@ export class NeuralNetwork {
 	inputLayer: Layer;
 	hiddenLayers: Layer[];
 	outputLayer: Layer;
-	aiBoard: AIBoard = new AIBoard();
+	//aiBoard: AIBoard = new AIBoard();
 
 	constructor(path?: string) {
 		let t0: number;
@@ -62,7 +62,7 @@ export class NeuralNetwork {
 		}
 	}
 
-	showMove(i: number) {
+	/*showMove(i: number) {
 		// Calculate the move coordinates.
 		const fromRow = Math.floor(i / 24);
 		const fromCol = Math.floor((i % 24) / 3);
@@ -92,7 +92,7 @@ export class NeuralNetwork {
 		);
 
 		return (this.aiBoard.isValidMove(tempMove)) ? tempMove : null;
-	}
+	}*/
 
 	getMove(boardState: number[]): Move {
 		// Create a board with the given state.
@@ -163,6 +163,34 @@ export class NeuralNetwork {
 		return move;
 	}
 
+	trainGame(history: Move[], observeFirst: boolean) {
+		const board: AIBoard = new AIBoard();
+		board.newGame();
+		let observe = observeFirst;
+		let count = 0;
+		for (const move of history) {
+			if (observe) {
+				// Find the correct output state.
+				const targetIndex = move.fromIndex * 3;
+				// TODO: Normalize the move for output layer training purposes.
+				const tempBoard: AIBoard = new AIBoard();
+				tempBoard.setAIBoardState(board.getAIBoardState());
+				tempBoard.makeMove(move);
+
+				// Train until the move is learned.
+
+				this.trainCase(board.getAIBoardState(), tempBoard.getNormalizedState(tempBoard.turn));
+
+				// OR WAIT TO APPLY TRAINING
+				count++;
+			}
+			board.makeMove(move);
+			observe = !observe;
+		}
+		this.applyTraining(.1);
+		this.resetTraining();
+	}
+
 	trainCase(boardState: number[], expectedOutput: number[]) {
 		const board: AIBoard = new AIBoard();
 		board.setAIBoardState(boardState);
@@ -187,6 +215,30 @@ export class NeuralNetwork {
 			layer.resetError();
 		}
 		this.inputLayer.resetError();
+	}
+
+	saveNetwork(): number[] {
+		const result: number[] = [];
+		for (const layer of [this.inputLayer, ...this.hiddenLayers]) {
+			for (const neuron of layer.neurons) {
+				for (const synapse of neuron.rightSynapses) {
+					result.push(synapse.weight);
+				}
+			}
+		}
+		return result;
+	}
+
+	loadNetwork(network: number[]) {
+		let i = 0;
+		for (const layer of [this.inputLayer, ...this.hiddenLayers]) {
+			for (const neuron of layer.neurons) {
+				for (const synapse of neuron.rightSynapses) {
+					synapse.weight = network[i];
+					++i;
+				}
+			}
+		}
 	}
 
 	private adjustError(expectedOutput: number[]) {

@@ -14,6 +14,7 @@ import {Move} from '../models/move';
 import {Router} from '@angular/router';
 import {HostListener} from '@angular/core';
 import {AIProjectZen} from '../models/ai-player2';
+import {NeuralNetwork} from '../models/ai/neural-network';
 
 @Component({
 	selector: 'app-game-board',
@@ -33,6 +34,7 @@ export class GameBoardComponent implements OnInit {
 	pauseBackgroundMusic: boolean;
 	playBackgroundMusic: boolean;
 	history: Move[] = [];
+	neuralNetwork: NeuralNetwork = new NeuralNetwork();
 	@HostListener('document: keypress', ['$event'])
 	playPauseBackgroundMusic(event: KeyboardEvent) {
 		const audio = document.getElementById('audioPlayer') as any;
@@ -116,12 +118,11 @@ export class GameBoardComponent implements OnInit {
 
 						// Train the losing AI.
 						if (winner === 1) {
-							const ai2 = this.player2 as AIProjectZen;
-							ai2.train(this.history, false);
+							this.neuralNetwork.trainGame(this.history, true);
 						} else {
-							const ai1 = this.player1 as AIProjectZen;
-							ai1.train(this.history, true);
+							this.neuralNetwork.trainGame(this.history, false);
 						}
+						this.newGameClicked();
 					}, 1000);
 				} else {
 					this.getMove();
@@ -130,6 +131,12 @@ export class GameBoardComponent implements OnInit {
 				alert('Move rejected');
 			});
 		}
+	}
+
+	saveClicked() {
+		const uri = 'data:application/octet-stream,' + encodeURIComponent(JSON.stringify(this.neuralNetwork.saveNetwork()));
+		location.href = uri;
+		// console.log(this.neuralNetwork.saveNetwork());
 	}
 
 	get currentPlayer(): Player {
