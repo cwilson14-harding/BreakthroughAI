@@ -196,7 +196,9 @@ export class NeuralNetwork {
 				targetOutput.length = this.outputLayer.neurons.length;
 				for (let i = 0; i < this.outputLayer.neurons.length; ++i) {
 					const tempMove = this.getValidMoveFromOutputIndex(i, board);
-					if (tempMove && move.to.row === tempMove.to.row && move.to.column === tempMove.to.column) {
+					if (tempMove &&
+						move.fromIndex === tempMove.fromIndex &&
+						move.toIndex === tempMove.toIndex) {
 						targetOutput[i] = 1;
 					} else {
 						targetOutput[i] = 0;

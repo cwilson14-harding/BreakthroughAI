@@ -127,13 +127,13 @@ export class GameBoardComponent implements OnInit {
 		const p2 = this.gameService.playerTwo;
 
 		switch (p1.type) {
-			case PlayerType.AI: this.player1 = new AIMCTSProjectZen(this.neuralNetwork); break;
+			case PlayerType.AI: this.player1 = new AIProjectZen(this.neuralNetwork); break;
 			case PlayerType.Local: this.player1 = new LocalPlayer(1); break;
 			case PlayerType.Network: this.player1 = new NetworkPlayer(this.game); break;
 		}
 
 		switch (p2.type) {
-			case PlayerType.AI: this.player2 = new AIMCTSProjectZen(this.neuralNetwork); break;
+			case PlayerType.AI: this.player2 = new AIProjectZen(this.neuralNetwork); break;
 			case PlayerType.Local: this.player2 = new LocalPlayer(2); break;
 			case PlayerType.Network: this.player2 = new NetworkPlayer(this.game); break;
 		}
