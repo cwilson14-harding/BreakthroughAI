@@ -8,7 +8,7 @@ export class NeuralNetwork {
 	inputLayer: Layer;
 	hiddenLayers: Layer[];
 	outputLayer: Layer;
-	//aiBoard: AIBoard = new AIBoard();
+	aiBoard: AIBoard = new AIBoard();
 
 	constructor(network?: number[]) {
 		let t0: number;
@@ -62,7 +62,7 @@ export class NeuralNetwork {
 		}
 	}
 
-	/*showMove(i: number) {
+	showMove(i: number) {
 		// Calculate the move coordinates.
 		const fromRow = Math.floor(i / 24);
 		const fromCol = Math.floor((i % 24) / 3);
@@ -92,7 +92,7 @@ export class NeuralNetwork {
 		);
 
 		return (this.aiBoard.isValidMove(tempMove)) ? tempMove : null;
-	}*/
+	}
 
 	getMove(boardState: number[]): Move {
 		// Create a board with the given state.

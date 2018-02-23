@@ -12,6 +12,7 @@ export class ToolbarComponent implements OnInit {
 @Output() showChatClicked = new EventEmitter<any>();
 @Output() forfeitClicked = new EventEmitter<any>();
 @Output() saveClicked = new EventEmitter<any>();
+@Output() trainClicked = new EventEmitter<any>();
 
   constructor() { }
 
@@ -32,5 +33,9 @@ export class ToolbarComponent implements OnInit {
 
   saveGame() {
     this.saveClicked.emit(null);
+  }
+
+  train() {
+	  this.trainClicked.emit(null);
   }
 }

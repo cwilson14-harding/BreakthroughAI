@@ -35,7 +35,7 @@ export class GameBoardComponent implements OnInit {
 	pauseBackgroundMusic: boolean;
 	playBackgroundMusic: boolean;
 	history: Move[] = [];
-	neuralNetwork: NeuralNetwork = new NeuralNetwork(new ProjectZenCore().PROJECT_ZEN_CORE);
+	neuralNetwork: NeuralNetwork = new NeuralNetwork(ProjectZenCore.PROJECT_ZEN_CORE);
 	@HostListener('document: keypress', ['$event'])
 	playPauseBackgroundMusic(event: KeyboardEvent) {
 		const audio = document.getElementById('audioPlayer') as any;
@@ -61,8 +61,8 @@ export class GameBoardComponent implements OnInit {
 		// Compare the user.uid field with the game.creatorId field.
 		// this.games = this.db.collection('games', ref => ref.where('creatorName', '==', this.currentUserName));
 		gameService.newGame(
-			new PlayerData('CJ', '', PlayerType.AI),
-			new PlayerData('Jack', '', PlayerType.AI),
+			new PlayerData('CJ', '', PlayerType.Local),
+			new PlayerData('Jack', '', PlayerType.Local),
 			'');
 		this.games = this.db.collection('games').valueChanges();
 		if (this.gameService.gameId !== '') {
@@ -132,6 +132,14 @@ export class GameBoardComponent implements OnInit {
 				alert('Move rejected');
 			});
 		}
+	}
+
+	trainClicked() {
+		this.neuralNetwork.resetTraining();
+		for (const trainingCase of ProjectZenCore.PROJECT_ZEN_TRAINING) {
+			this.neuralNetwork.trainCase(trainingCase[0], trainingCase[1]);
+		}
+		this.neuralNetwork.applyTraining(.2);
 	}
 
 	saveClicked() {
