@@ -111,6 +111,10 @@ export class NeuralNetwork {
 		return (aiBoard.isValidMove(tempMove)) ? tempMove : null;
 	}
 
+	createMove(fromRow: number, fromCol: number, toRow: number, toCol: number): Move {
+		return new Move(new Coordinate(fromRow, fromCol), new Coordinate(toRow, toCol));
+	}
+
 	getMove(boardState: number[]): Move {
 		// Create a board with the given state.
 		const board: AIBoard = new AIBoard();

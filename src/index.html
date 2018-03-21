@@ -120,6 +120,64 @@
         return a;
       }
 
+      function columnToIndex(letter) {
+        switch (letter.toLowerCase()) {
+            case 'a': return 0;
+            case 'b': return 1;
+            case 'c': return 2;
+            case 'd': return 3;
+            case 'e': return 4;
+            case 'f': return 5;
+            case 'g': return 6;
+            case 'h': return 7;
+        }
+      }
+
+      function rowToIndex(row) {
+	      return row - 1;
+      }
+
+      function trainURL(url) {
+          $.get('https://crossorigin.me/'+url, function(data) {
+              var r = /(\w\d[-x]\w\d|resign)/g;
+              var r2 = /1\..* \d-\d/g;
+              var regex = new RegExp(r);
+              var regex2 = new RegExp(r2);
+              temp1.resetTraining();
+              var history = [];
+              var move = 1;
+              do {
+                  j = regex2.exec(data)
+                  if (j) {
+                      do {
+                          m = regex.exec(j[0]);
+                          if (m) {
+                              if (m[0] !== 'resign') {
+                                  var fromRow = +rowToIndex(m[0][1]);
+                                  var fromCol = +columnToIndex(m[0][0]);
+                                  var toRow = +rowToIndex(m[0][4]);
+                                  var toCol = +columnToIndex(m[0][3]);
+                                  var newMove = temp1.createMove(fromRow, fromCol, toRow, toCol);
+                                  history.push(newMove);
+                                  move = (move === 1) ? 2 : 1;
+                                  if (newMove.to.row === 0 || newMove.to.row === 7) {
+                                      temp1.trainGame(history, move === 2);
+                                      history = [];
+                                      move = 1;
+                                  }
+                              } else {
+                                  temp1.trainGame(history, move === 2);
+                                  history = [];
+                                  move = 1;
+                              }
+                          }
+                      } while (m);
+                  }
+              } while (j);
+              console.log('done');
+          });
+      }
+
   </script>
 </head>
 <body>
