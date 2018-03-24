@@ -184,7 +184,8 @@
 
       function scoreBoard(player) {
           refreshBoard();
-          temp1.aiBoard.turn = player;
+          if (player)
+            temp1.aiBoard.turn = player;
           console.log(temp1.aiBoard.scoreBoardState());
       }
   </script>

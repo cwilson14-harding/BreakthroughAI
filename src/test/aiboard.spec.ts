@@ -24,6 +24,21 @@ describe('AIBoard', () => {
 		expect(board.isGameOver()).toBe(0);
 	}));
 
+	it('should detect when the game is over', inject([], () => {
+		const board: AIBoard = new AIBoard();
+		board.setAIBoardState([-1,
+			-1,-1,-1,-1,-1,-1,-1,-1,
+			-1,-1,-1,-1,-1,-1,-1,0,
+			0,0,0,0,0,0,0,0,
+			0,0,0,0,0,0,0,0,
+			0,0,0,0,0,0,0,0,
+			0,0,0,0,0,0,0,0,
+			1,1,1,1,1,1,-1,1,
+			1,1,1,1,1,1,-1,1
+		]);
+		expect(board.isGameOver()).toBe(-1);
+	}));
+
 	it('should detect valid straight moves', inject([], () => {
 		const board: AIBoard = new AIBoard();
 		board.newGame();
@@ -105,7 +120,7 @@ describe('AIBoard', () => {
 			1,1,1,1,1,1,-1,1,
 			1,1,1,1,1,1,1,1
 		]);
-		expect(board.getNormalizedState(-1)).toEqual([1,
+		expect(board.getNormalizedState(-1)).toEqual([
 			1,1,1,1,1,1,1,1,
 			1,1,1,1,1,1,1,0,
 			0,0,0,0,0,0,0,0,
@@ -130,7 +145,7 @@ describe('AIBoard', () => {
 			1,1,1,1,1,1,1,0,
 			1,1,1,1,1,1,1,1
 		]);
-		expect(board.getNormalizedState(1)).toEqual([1,
+		expect(board.getNormalizedState(1)).toEqual([
 			1,1,1,1,1,1,1,1,
 			0,1,1,1,1,1,1,1,
 			0,0,0,0,0,0,0,0,
@@ -140,5 +155,11 @@ describe('AIBoard', () => {
 			1,2,2,2,2,2,2,2,
 			2,2,2,2,2,2,2,2
 		]);
+	}));
+
+	it('should give possible moves from a location', inject([], () => {
+		const board: AIBoard = new AIBoard();
+		board.newGame();
+		expect(board.findAvailableMoves(new Coordinate(1, 1)).length).toBe(3);
 	}));
 });

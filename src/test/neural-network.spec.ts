@@ -28,7 +28,7 @@ describe('NeuralNetwork', () => {
 		let valid = true;
 		for (let i = 0; i < neuralNetwork.inputLayer.neurons.length && valid; ++i) {
 			const value = neuralNetwork.inputLayer.neurons[i].value;
-			if (value !== normalizedState[i + 1]) {
+			if (value !== normalizedState[i]) {
 				valid = false;
 			}
 		}

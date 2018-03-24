@@ -4,7 +4,7 @@ export class MCTSWorkerScoring {
   busy = false;
   currentTask: Task;
 
-  private worker: Worker = new Worker('assets/scripts/worker.js');
+  private worker: Worker = new Worker('assets/scripts/worker-scoring.js');
 
   constructor(public workerFinishedCallback?: Function) {}
 

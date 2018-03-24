@@ -104,4 +104,9 @@ describe('GameBoard', function () {
     const move: Move = new Move(new Coordinate(6, 7), new Coordinate(5, 7));
     expect(board.isMoveValid(move)).toBeFalsy();
   }));
+  it('should give possible moves from a location', inject([], () => {
+      const board: Board = new Board();
+      board.newGame();
+      expect(board.findAvailableMoves(new Coordinate(1, 1)).length).toBe(3);
+  }));
 });

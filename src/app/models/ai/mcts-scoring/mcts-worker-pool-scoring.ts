@@ -1,7 +1,7 @@
-import {MCTSWorkerScoring} from './mcts-worker-random';
+import {MCTSWorkerScoring} from './mcts-worker-scoring';
 import {Task} from '../task';
 
-export class MCTSWorkerPoolRandom {
+export class MCTSWorkerPoolScoring {
   static readonly THREAD_COUNT = 3;
   private workers: MCTSWorkerScoring[] = [];
   private tasks: Task[] = [];
@@ -33,7 +33,7 @@ export class MCTSWorkerPoolRandom {
   }
 
   private getWorkers(): MCTSWorkerScoring[] {
-    for (let i = 0; i < MCTSWorkerPoolRandom.THREAD_COUNT; ++i) {
+    for (let i = 0; i < MCTSWorkerPoolScoring.THREAD_COUNT; ++i) {
       this.workers.push(new MCTSWorkerScoring((worker: MCTSWorkerScoring) => {
         this.workerFinished(worker);
       }));

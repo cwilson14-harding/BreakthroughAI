@@ -23,6 +23,32 @@ export class AIBoard {
 		}
 	}
 
+	findAvailableMoves(location: Coordinate): Coordinate[] {
+		if (this.board[location.index] !== this.turn) {
+			return [];
+		}
+
+		const availableMoves: Coordinate[] = [];
+
+		// Find the next row to move to.
+		let row: number;
+		if (this.board[location.index] === -1) {
+			row = location.row + 1;
+		} else {
+			row = location.row - 1;
+		}
+
+		for (let count = -1; count <= 1; count++) {
+			const column: number = location.column + count;
+			const location2: Coordinate = new Coordinate(row, column);
+			const move = new Move(location, location2);
+			if (this.isValidMove(move)) {
+				availableMoves.push(move.to);
+			}
+		}
+		return availableMoves;
+	}
+
 	makeMove(move: Move): boolean {
 		if (!this.isValidMove(move)) {
 			return false;
@@ -71,6 +97,9 @@ export class AIBoard {
 	}
 
 	isValidMove(move: Move): boolean {
+		if (!move) {
+			return false;
+		}
 		const fromIndex = move.fromIndex;
 		const toIndex = move.toIndex;
 
@@ -109,8 +138,8 @@ export class AIBoard {
 
 	getNormalizedState(team: number): number[] {
 		// Returns the state from the given perspective, which normalizes it.
+		const result: number[] = [];
 		if (team === -1) {
-			const result: number[] = [];
 			for (let i = 0; i < this.board.length; ++i) {
 				if (this.board[i] === -1) {
 					result.push(1);
@@ -120,9 +149,7 @@ export class AIBoard {
 					result.push(0);
 				}
 			}
-			return result;
 		} else {
-			const result: number[] = [];
 			for (let i = this.board.length - 1; i >= 0; --i) {
 				if (this.board[i] === -1) {
 					result.push(2);
@@ -132,8 +159,8 @@ export class AIBoard {
 					result.push(0);
 				}
 			}
-			return result;
 		}
+		return result;
 	}
 
 	setGUIBoardState(state: string) {
@@ -141,7 +168,13 @@ export class AIBoard {
 		this.board = [];
 		this.board.length = 64;
 		for (let i = 1; i < state.length; ++i) {
-			this.board[i - 1] = +state[i];
+			if (+state[i] === 1) {
+				this.board[i - 1] = -1;
+			} else if (+state[i] === 2) {
+				this.board[i - 1] = 1;
+			} else {
+				this.board[i - 1] = 0;
+			}
 		}
 	}
 
@@ -150,7 +183,7 @@ export class AIBoard {
 		this.board = state.slice(1);
 	}
 
-	scoreBoardState(): number {
+	scoreBoardState(fromPlayer: number = this.turn): number {
 		// Count the material.
 		const pieceMap = [
 			5, 15, 15, 5, 5, 15, 15, 5,
@@ -161,7 +194,8 @@ export class AIBoard {
 			16, 21, 21, 21, 21, 21, 21, 16,
 			20, 28, 28, 28, 28, 28, 28, 20,
 			36, 36, 36, 36, 36, 36, 36, 36];
-		const board = this.getNormalizedState(this.turn);
+		const board = this.getNormalizedState(fromPlayer);
+		console.log(board);
 		let score = 0;
 
 		const myPieces = [];
@@ -193,16 +227,12 @@ export class AIBoard {
 
 				score += stability * 10;
 
-			} else if (board[c] === -1) {
+			} else if (board[c] === 2) {
 				enemyPieces.push(c);
 			}
 		}
 
 		score += (myPieces.length - enemyPieces.length) * 10;
-		
-
-		// TODO: Score board state on potentially capturing moves.
-		// TODO: Choose highest scoring move.
 
 		// Return the score.
 		return score;

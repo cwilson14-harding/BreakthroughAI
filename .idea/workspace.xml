@@ -2,10 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="55adccb2-97a5-4c9f-a26a-81531ebf5f3f" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/app/models/ai-player-mcts-scoring.ts" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/app/models/ai/mcts-scoring/mcts-scoring.ts" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/app/models/ai/mcts-scoring/mcts-worker-pool-scoring.ts" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/app/models/ai/mcts-scoring/mcts-worker-scoring.ts" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/assets/scripts/worker-scoring.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/coordinate.spec.ts" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/app/game-board/game-board.component.ts" afterPath="$PROJECT_DIR$/src/app/game-board/game-board.component.ts" />
       <change beforePath="$PROJECT_DIR$/src/app/models/ai/aiboard.ts" afterPath="$PROJECT_DIR$/src/app/models/ai/aiboard.ts" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/ai/mcts-random/mcts-worker-pool-random.ts" afterPath="$PROJECT_DIR$/src/app/models/ai/mcts-random/mcts-worker-pool-random.ts" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/ai/mcts-random/mcts-worker-random.ts" afterPath="$PROJECT_DIR$/src/app/models/ai/mcts-random/mcts-worker-random.ts" />
       <change beforePath="$PROJECT_DIR$/src/app/models/game-core/coordinate.ts" afterPath="$PROJECT_DIR$/src/app/models/game-core/coordinate.ts" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/move.ts" afterPath="$PROJECT_DIR$/src/app/models/move.ts" />
       <change beforePath="$PROJECT_DIR$/src/index.html" afterPath="$PROJECT_DIR$/src/index.html" />
+      <change beforePath="$PROJECT_DIR$/src/test/aiboard.spec.ts" afterPath="$PROJECT_DIR$/src/test/aiboard.spec.ts" />
+      <change beforePath="$PROJECT_DIR$/src/test/board.spec.ts" afterPath="$PROJECT_DIR$/src/test/board.spec.ts" />
+      <change beforePath="$PROJECT_DIR$/src/test/neural-network.spec.ts" afterPath="$PROJECT_DIR$/src/test/neural-network.spec.ts" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/dist/" />
@@ -20,21 +33,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="mcts-worker-random.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/models/ai/mcts-random/mcts-worker-random.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="60" lean-forward="false" selection-start-line="6" selection-start-column="60" selection-end-line="6" selection-end-column="60" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="aiboard.ts" pinned="false" current-in-tab="false">
+      <file leaf-file-name="aiboard.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/app/models/ai/aiboard.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-232">
-              <caret line="163" column="55" lean-forward="false" selection-start-line="163" selection-start-column="55" selection-end-line="163" selection-end-column="55" />
+            <state relative-caret-position="485">
+              <caret line="182" column="36" lean-forward="true" selection-start-line="182" selection-start-column="36" selection-end-line="182" selection-end-column="36" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -42,21 +45,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="coordinate.ts" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/app/models/game-core/coordinate.ts">
+      <file leaf-file-name="aiboard.spec.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/aiboard.spec.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="38" lean-forward="false" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="move.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/models/move.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="56" lean-forward="false" selection-start-line="3" selection-start-column="56" selection-end-line="3" selection-end-column="56" />
+            <state relative-caret-position="442">
+              <caret line="38" column="42" lean-forward="false" selection-start-line="38" selection-start-column="42" selection-end-line="38" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -65,8 +58,20 @@
       <file leaf-file-name="game-board.component.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/game-board/game-board.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2487">
-              <caret line="68" column="55" lean-forward="false" selection-start-line="68" selection-start-column="55" selection-end-line="68" selection-end-column="55" />
+            <state relative-caret-position="174">
+              <caret line="69" column="54" lean-forward="true" selection-start-line="69" selection-start-column="54" selection-end-line="69" selection-end-column="54" />
+              <folding>
+                <element signature="e#0#62#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ai-player-mcts-scoring.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/models/ai-player-mcts-scoring.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="5" column="25" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -75,8 +80,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="186" column="37" lean-forward="false" selection-start-line="186" selection-start-column="37" selection-end-line="186" selection-end-column="37" />
+            <state relative-caret-position="448">
+              <caret line="189" column="7" lean-forward="false" selection-start-line="189" selection-start-column="7" selection-end-line="189" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -88,6 +93,12 @@
     <findStrings>
       <find>getMove</find>
       <find>trainGame</find>
+      <find>score</find>
+      <find>scoreboard</find>
+      <find>find</find>
+      <find>setAIBo</find>
+      <find>-1</find>
+      <find>? -1</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -100,11 +111,20 @@
         <option value="$PROJECT_DIR$/src/app/models/ai/neural-network.ts" />
         <option value="$PROJECT_DIR$/src/app/models/ai/project-zen-core.ts" />
         <option value="$PROJECT_DIR$/src/app/models/ai/mcts-random/mcts-worker-random.ts" />
+        <option value="$PROJECT_DIR$/src/app/models/ai/mcts-random/mcts-worker-scoring.ts" />
+        <option value="$PROJECT_DIR$/src/app/models/ai/mcts-random/mcts-worker-pool-scoring.ts" />
+        <option value="$PROJECT_DIR$/src/app/models/ai/mcts-random/mcts-scoring.ts" />
+        <option value="$PROJECT_DIR$/src/app/models/ai/mcts-scoring/mcts-scoring.ts" />
+        <option value="$PROJECT_DIR$/src/app/models/ai-player-mcts-scoring.ts" />
+        <option value="$PROJECT_DIR$/src/app/game-board/game-board.component.ts" />
+        <option value="$PROJECT_DIR$/src/index.html" />
+        <option value="$PROJECT_DIR$/src/test/neural-network.spec.ts" />
         <option value="$PROJECT_DIR$/src/app/models/move.ts" />
         <option value="$PROJECT_DIR$/src/app/models/game-core/coordinate.ts" />
-        <option value="$PROJECT_DIR$/src/app/game-board/game-board.component.ts" />
+        <option value="$PROJECT_DIR$/src/test/coordinate.spec.ts" />
+        <option value="$PROJECT_DIR$/src/test/board.spec.ts" />
+        <option value="$PROJECT_DIR$/src/test/aiboard.spec.ts" />
         <option value="$PROJECT_DIR$/src/app/models/ai/aiboard.ts" />
-        <option value="$PROJECT_DIR$/src/index.html" />
       </list>
     </option>
   </component>
@@ -123,7 +143,9 @@
     <option name="width" value="1280" />
     <option name="height" value="800" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
@@ -186,7 +208,24 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="models" type="462c0819:PsiDirectoryNode" />
               <item name="ai" type="462c0819:PsiDirectoryNode" />
-              <item name="mcts-random" type="462c0819:PsiDirectoryNode" />
+              <item name="mcts-scoring" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BreakthroughAI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BreakthroughAI" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+              <item name="game-core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BreakthroughAI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BreakthroughAI" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+              <item name="game-core" type="462c0819:PsiDirectoryNode" />
+              <item name="coordinate.ts" type="620a8d5e:NestingTreeNode" />
             </path>
             <path>
               <item name="BreakthroughAI" type="b2602c69:ProjectViewProjectNode" />
@@ -231,9 +270,15 @@
     <property name="node.js.selected.package.tslint" value="$PROJECT_DIR$/node_modules/tslint" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\cj\Documents\GitHub\BreakthroughAI\src\app\models\ai\mcts-scoring" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\cj\Documents\GitHub\BreakthroughAI\src\app\models\ai" />
+      <recent name="C:\Users\cj\Documents\GitHub\BreakthroughAI\src\test" />
+      <recent name="C:\Users\cj\Documents\GitHub\BreakthroughAI\src\assets\scripts" />
+      <recent name="C:\Users\cj\Documents\GitHub\BreakthroughAI\src\app\models\ai\mcts-random" />
       <recent name="C:\Users\cj\Documents\GitHub\BreakthroughAI\src\app\models" />
+      <recent name="C:\Users\cj\Documents\GitHub\BreakthroughAI\src\app\models\ai" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -264,12 +309,12 @@
       <workItem from="1519405920890" duration="1505000" />
       <workItem from="1520974514112" duration="137000" />
       <workItem from="1521584233656" duration="8034000" />
-      <workItem from="1521912506577" duration="2744000" />
+      <workItem from="1521912506577" duration="14580000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13316000" />
+    <option name="totallyTimeSpent" value="25152000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -313,75 +358,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="2" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/aiboard.spec.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="26" column="7" lean-forward="false" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/models/ai-project-zen.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="20" column="89" lean-forward="false" selection-start-line="20" selection-start-column="89" selection-end-line="20" selection-end-column="89" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/models/ai/aiboard.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-323">
-          <caret line="96" column="0" lean-forward="false" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/models/ai/neural-network.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="43" column="13" lean-forward="false" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/app.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="38" column="53" lean-forward="false" selection-start-line="38" selection-start-column="53" selection-end-line="38" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tslint.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="26" column="11" lean-forward="false" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/game-board/game-board.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-144">
-          <caret line="72" column="9" lean-forward="true" selection-start-line="72" selection-start-column="9" selection-end-line="72" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/board.spec.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="79" column="53" lean-forward="true" selection-start-line="79" selection-start-column="53" selection-end-line="79" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/models/ai/layer.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="355">
@@ -459,13 +440,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/board.spec.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="79" column="53" lean-forward="true" selection-start-line="79" selection-start-column="53" selection-end-line="79" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/models/ai/mcts-worker-pool.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -481,24 +455,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/aiboard.spec.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="142" column="8" lean-forward="false" selection-start-line="142" selection-start-column="8" selection-end-line="142" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/models/board.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="62" column="4" lean-forward="false" selection-start-line="62" selection-start-column="4" selection-end-line="62" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/main-menu/main-menu.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="130">
           <caret line="114" column="77" lean-forward="false" selection-start-line="114" selection-start-column="77" selection-end-line="114" selection-end-column="77" />
+          <folding>
+            <element signature="e#0#77#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -514,13 +477,6 @@
         <state relative-caret-position="417">
           <caret line="40" column="203" lean-forward="false" selection-start-line="40" selection-start-column="203" selection-end-line="40" selection-end-column="203" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/neural-network.spec.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="34" column="35" lean-forward="false" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
         </state>
       </provider>
     </entry>
@@ -567,6 +523,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1734">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#77#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -574,13 +533,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="23" column="47" lean-forward="true" selection-start-line="23" selection-start-column="47" selection-end-line="23" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/models/ai-player-mcts-random.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -652,45 +604,160 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/models/ai/aiboard.ts">
+    <entry file="file://$PROJECT_DIR$/src/app/models/ai-player-mcts-random.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-232">
-          <caret line="163" column="55" lean-forward="false" selection-start-line="163" selection-start-column="55" selection-end-line="163" selection-end-column="55" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/assets/scripts/worker-scoring.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/models/ai/mcts-scoring/mcts-worker-scoring.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="62" lean-forward="false" selection-start-line="27" selection-start-column="62" selection-end-line="27" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/models/ai/mcts-scoring/mcts-worker-pool-scoring.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="36" lean-forward="false" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
           <folding>
-            <element signature="e#0#29#0" expanded="true" />
+            <element signature="e#0#56#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/models/ai/mcts-scoring/mcts-scoring.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1014">
+          <caret line="142" column="47" lean-forward="false" selection-start-line="142" selection-start-column="47" selection-end-line="142" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#34#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/models/ai/task.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="28" lean-forward="false" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/sign-in/node.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-323">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/models/board.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="86">
+          <caret line="19" column="4" lean-forward="false" selection-start-line="19" selection-start-column="4" selection-end-line="46" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/favicon.ico">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/neural-network.spec.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="30" column="43" lean-forward="false" selection-start-line="30" selection-start-column="43" selection-end-line="30" selection-end-column="43" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="186" column="37" lean-forward="false" selection-start-line="186" selection-start-column="37" selection-end-line="186" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/game-board/game-board.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2487">
-          <caret line="68" column="55" lean-forward="false" selection-start-line="68" selection-start-column="55" selection-end-line="68" selection-end-column="55" />
+        <state relative-caret-position="448">
+          <caret line="189" column="7" lean-forward="false" selection-start-line="189" selection-start-column="7" selection-end-line="189" selection-end-column="7" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/models/move.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="56" lean-forward="false" selection-start-line="3" selection-start-column="56" selection-end-line="3" selection-end-column="56" />
+        <state relative-caret-position="238">
+          <caret line="14" column="42" lean-forward="false" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/coordinate.spec.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="16" column="8" lean-forward="false" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/models/ai-player-mcts-scoring.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="5" column="25" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/game-board/game-board.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="69" column="54" lean-forward="true" selection-start-line="69" selection-start-column="54" selection-end-line="69" selection-end-column="54" />
+          <folding>
+            <element signature="e#0#62#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/models/game-core/coordinate.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="38" lean-forward="false" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
+        <state relative-caret-position="255">
+          <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/board.spec.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="109" column="74" lean-forward="false" selection-start-line="109" selection-start-column="74" selection-end-line="109" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/aiboard.spec.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="38" column="42" lean-forward="false" selection-start-line="38" selection-start-column="42" selection-end-line="38" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/models/ai/aiboard.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="485">
+          <caret line="182" column="36" lean-forward="true" selection-start-line="182" selection-start-column="36" selection-end-line="182" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
