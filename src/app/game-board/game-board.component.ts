@@ -137,15 +137,15 @@ export class GameBoardComponent implements OnInit {
 
 		switch (p2.type) {
 			case PlayerType.AI:
-			/*switch (Math.floor(Math.random() * 3)) {
-				case 0: this.player2 = new AIPlayerMCTSRandom(); break;
-				case 1: this.player2 = new AIPlayerMCTSDefensive(); break;
-					case 2: this.player2 = new AIMCTSProjectZen(this.neuralNetwork); break;
-					case 3: this.player2 = new AIProjectZen(this.neuralNetwork); break;
-					case 4: this.player2 = new AIProjectZen(); break;
-					case 5: this.player2 = new AIMCTSProjectZen(); break;
-				}*/
-				this.player2 = new AIMCTSProjectZen(this.neuralNetwork);
+				/*switch (Math.floor(Math.random() * 3)) {
+					case 0: this.player2 = new AIPlayerMCTSRandom(); break;
+					case 1: this.player2 = new AIPlayerMCTSDefensive(); break;
+						case 2: this.player2 = new AIMCTSProjectZen(this.neuralNetwork); break;
+						case 3: this.player2 = new AIProjectZen(this.neuralNetwork); break;
+						case 4: this.player2 = new AIProjectZen(); break;
+						case 5: this.player2 = new AIMCTSProjectZen(); break;
+					}*/
+				this.player2 = new AIPlayerMCTSRandom();
 				break;
 			case PlayerType.Local: this.player2 = new LocalPlayer(2); break;
 			case PlayerType.Network: this.player2 = new NetworkPlayer(this.game); break;

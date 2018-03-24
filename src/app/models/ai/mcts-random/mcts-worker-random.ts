@@ -4,7 +4,7 @@ export class MCTSWorkerRandom {
   busy = false;
   currentTask: Task;
 
-  private worker: Worker = new Worker('assets/scripts/worker-random.js');
+  private worker: Worker = new Worker('assets/scripts/worker.js');
 
   constructor(public workerFinishedCallback?: Function) {}
 

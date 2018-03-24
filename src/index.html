@@ -12,129 +12,133 @@
   <script src="assets/scripts/jquery.min.js"></script>
   <script src="assets/scripts/mouse.parallax.js"></script>
   <script>
-    // Tools for working on the AI.
-	  cases = [
-		  [[-1,
-			  -1,-1,-1,-1,-1,-1,-1,-1,
-			  -1,-1,-1,-1,-1,-1,-1,0,
-			  0,0,0,0,0,0,0,0,
-			  0,0,0,0,0,0,0,0,
-			  0,0,0,0,0,0,0,0,
-			  0,0,0,0,0,0,0,0,
-			  1,1,1,1,1,1,-1,1,
-			  1,1,1,1,1,1,1,1
-		  ],[
-			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,
-			  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-		  ]],
-		  [[1,
-			  -1,-1,-1,-1,-1,-1,-1,-1,
-			  -1,-1,-1,-1,-1,-1,-1,1,
-			  0,0,0,0,0,0,0,0,
-			  0,0,0,0,0,0,0,0,
-			  0,0,0,0,0,0,0,0,
-			  0,0,0,0,0,0,0,0,
-			  1,1,1,1,1,1,1,0,
-			  1,1,1,1,1,1,1,1
-		  ],[
-		  	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-		  ]]
-	  ];
+      // Tools for working on the AI.
+      cases = [
+          [[-1,
+              -1,-1,-1,-1,-1,-1,-1,-1,
+              -1,-1,-1,-1,-1,-1,-1,0,
+              0,0,0,0,0,0,0,0,
+              0,0,0,0,0,0,0,0,
+              0,0,0,0,0,0,0,0,
+              0,0,0,0,0,0,0,0,
+              1,1,1,1,1,1,-1,1,
+              1,1,1,1,1,1,1,1
+          ],[
+              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,
+              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+          ]],
+          [[1,
+              -1,-1,-1,-1,-1,-1,-1,-1,
+              -1,-1,-1,-1,-1,-1,-1,1,
+              0,0,0,0,0,0,0,0,
+              0,0,0,0,0,0,0,0,
+              0,0,0,0,0,0,0,0,
+              0,0,0,0,0,0,0,0,
+              1,1,1,1,1,1,1,0,
+              1,1,1,1,1,1,1,1
+          ],[
+              0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+          ]]
+      ];
 
-	  function train() {
-		  temp1.resetTraining();
-		  for (var i = 0; i < cases.length; ++i)
-			  temp1.trainCase(...cases[i]);
-		  temp1.applyTraining(.2);
-	  }
-
-	  function log() {
-		  console.log(temp1.outputLayer.neurons[0].leftSynapses[0]);
-	  }
-
-	  function logNodes() {
-		  var values = [];
-		  values.length = temp1.outputLayer.neurons.length;
-		  for (var i = 0; i < temp1.outputLayer.neurons.length; ++i) {
-			  values[i] = 0;
-			  for (var j = 0; j < temp1.outputLayer.neurons[i].leftSynapses.length; ++j) {
-				  values[i] += temp1.outputLayer.neurons[i].leftSynapses[j].weight;
-			  }
-		  }
-		  console.log(values);
-	  }
-
-	  function playCase(i) {
-		  temp2.setAIBoardState(cases[i][0]);
-		  temp1.aiBoard.setAIBoardState(cases[i][0]);
-	  }
-
-	  function getMove() {
-		  return temp1.getMove(temp2.getAIBoardState());
-	  }
-
-	  function playMove() {
-		  return temp2.makeMove(getMove());
-	  }
-
-	  function showMove(index) {
-        return temp1.showMove(index);
+      function train() {
+          temp1.resetTraining();
+          for (var i = 0; i < cases.length; ++i)
+              temp1.trainCase(...cases[i]);
+          temp1.applyTraining(.2);
       }
 
-	function showValidMove(index) {
-		return temp1.showValidMove(index);
-	}
+      function log() {
+          console.log(temp1.outputLayer.neurons[0].leftSynapses[0]);
+      }
 
-	function showAllValidMoves() {
-	  	for (var i = 0; i < temp1.outputLayer.neurons.length; ++i) {
-	      var move = showValidMove(i);
-	      if (move) console.log(i);
-	    }
-    }
+      function logNodes() {
+          var values = [];
+          values.length = temp1.outputLayer.neurons.length;
+          for (var i = 0; i < temp1.outputLayer.neurons.length; ++i) {
+              values[i] = 0;
+              for (var j = 0; j < temp1.outputLayer.neurons[i].leftSynapses.length; ++j) {
+                  values[i] += temp1.outputLayer.neurons[i].leftSynapses[j].weight;
+              }
+          }
+          console.log(values);
+      }
+
+      function playCase(i) {
+          temp2.setAIBoardState(cases[i][0]);
+          temp1.aiBoard.setAIBoardState(cases[i][0]);
+      }
+
+      function getMove() {
+          return temp1.getMove(temp2.getAIBoardState());
+      }
+
+      function playMove() {
+          return temp2.makeMove(getMove());
+      }
+
+      function showMove(index) {
+          return temp1.showMove(index);
+      }
+
+      function showValidMove(index) {
+          return temp1.showValidMove(index);
+      }
+
+      function refreshBoard() {
+          temp1.aiBoard.setAIBoardState(temp2.getAIBoardState());
+      }
+
+      function showAllValidMoves() {
+          for (var i = 0; i < temp1.outputLayer.neurons.length; ++i) {
+              var move = showValidMove(i);
+              if (move) console.log(i);
+          }
+      }
 
       function showNormalizedBoard() {
-	  	return temp1.aiBoard.getNormalizedState(temp1.aiBoard.turn);
+          return temp1.aiBoard.getNormalizedState(temp1.aiBoard.turn);
       }
 
       function copySolution(index) {
-	  	for (var i = 0; i < temp1.outputLayer.neurons.length; ++i) {
-	  		temp1.outputLayer.neurons[i].value = cases[index][1][i];
-        }
+          for (var i = 0; i < temp1.outputLayer.neurons.length; ++i) {
+              temp1.outputLayer.neurons[i].value = cases[index][1][i];
+          }
       }
 
       function updateAIBoard() {
-		  temp1.aiBoard.setAIBoardState(temp2.getAIBoardState());
+          temp1.aiBoard.setAIBoardState(temp2.getAIBoardState());
       }
 
       function getOutputLayer() {
-	  	var a = [];
-	  	for (var i = 0; i < temp1.outputLayer.neurons.length; ++i) {
-	  		a.push(temp1.outputLayer.neurons[i].value);
-        }
-        return a;
+          var a = [];
+          for (var i = 0; i < temp1.outputLayer.neurons.length; ++i) {
+              a.push(temp1.outputLayer.neurons[i].value);
+          }
+          return a;
       }
 
       function columnToIndex(letter) {
-        switch (letter.toLowerCase()) {
-            case 'a': return 0;
-            case 'b': return 1;
-            case 'c': return 2;
-            case 'd': return 3;
-            case 'e': return 4;
-            case 'f': return 5;
-            case 'g': return 6;
-            case 'h': return 7;
-        }
+          switch (letter.toLowerCase()) {
+              case 'a': return 0;
+              case 'b': return 1;
+              case 'c': return 2;
+              case 'd': return 3;
+              case 'e': return 4;
+              case 'f': return 5;
+              case 'g': return 6;
+              case 'h': return 7;
+          }
       }
 
       function rowToIndex(row) {
-	      return row - 1;
+          return row - 1;
       }
 
       function trainURL(url) {
@@ -178,9 +182,12 @@
           });
       }
 
+      function scoreBoard() {
+          console.log(temp1.aiBoard.scoreBoardState());
+      }
   </script>
 </head>
 <body>
-  <app-root></app-root>
+<app-root></app-root>
 </body>
 </html>

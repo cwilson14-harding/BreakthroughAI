@@ -148,4 +148,38 @@ export class AIBoard {
 		this.turn = state[0];
 		this.board = state.slice(1);
 	}
+
+	scoreBoardState(): number {
+		// Count the material.
+		const pieceMap = [
+			5, 15, 15, 5, 5, 15, 15, 5,
+			2, 3, 3, 3, 3, 3, 3, 2,
+			4, 6, 6, 6, 6, 6, 6, 4,
+			7, 10, 10, 10, 10, 10, 10, 7,
+			11, 15, 15, 15, 15, 15, 15, 11,
+			16, 21, 21, 21, 21, 21, 21, 16,
+			20, 28, 28, 28, 28, 28, 28, 20,
+			36, 36, 36, 36, 36, 36, 36, 36];
+		const board = this.getNormalizedState(this.turn * -1);
+		let score = 0;
+
+		const myPieces = [];
+		const enemyPieces = [];
+		for (let c = 0; c < 64; ++c) {
+			if (board[c] === 1) {
+				myPieces.push(c);
+				score += pieceMap[c];
+			} else if (board[c] === -1) {
+				enemyPieces.push(c);
+			}
+		}
+
+		score += (myPieces.length - enemyPieces.length) * 10;
+		
+
+
+
+		// Return the score.
+		return score;
+	}
 }
