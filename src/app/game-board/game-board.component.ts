@@ -67,7 +67,7 @@ export class GameBoardComponent implements OnInit {
 		// this.games = this.db.collection('games', ref => ref.where('creatorName', '==', this.currentUserName));
 		gameService.newGame(
 			new PlayerData('CJ', '', PlayerType.AI),
-			new PlayerData('Jack', '', PlayerType.AI),
+			new PlayerData('Jack', '', PlayerType.Local),
 			'');
 		this.games = this.db.collection('games').valueChanges();
 		if (this.gameService.gameId !== '') {

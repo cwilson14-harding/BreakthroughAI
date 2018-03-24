@@ -59,7 +59,7 @@ export class MCTSScoring {
         maxNodeScore = score;
       }
     }
-
+console.log(this.currentNode.getAllChildren());
     // Choose a random node from the top nodes.
     return maxNode;
   }
@@ -133,17 +133,17 @@ export class MCTSScoring {
 
     // Evaluate all of the nodes.
     for (const chosenNode of children) {
-      const task: Task = new Task(chosenNode, 300, this.taskCompleted);
+      const task: Task = new Task(chosenNode, 200, this.taskCompleted);
       this.workerPool.addTask(task);
     }
 
     // Concentrate on the best nodes.
-    this.workerPool.onAllTasksCompleted(() => {
+    /*this.workerPool.onAllTasksCompleted(() => {
       const sortedNodes: Node[] = this.sortNodesByBest(children, node.turn);
       for (let i = 0; i < MCTSWorkerPoolScoring.THREAD_COUNT && i < children.length; ++i) {
-        this.workerPool.addTask(new Task(sortedNodes[i], 500, this.taskCompleted));
+        this.workerPool.addTask(new Task(sortedNodes[i], 100, this.taskCompleted));
       }
-    });
+    });*/
 
   }
 

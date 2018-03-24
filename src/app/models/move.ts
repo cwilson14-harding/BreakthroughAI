@@ -14,4 +14,8 @@ export class Move {
   equals(move: Move): boolean {
     return this.from.equals(move.from) && this.to.equals(move.to);
   }
+
+  get toString(): string {
+    return this.from.toString + '-' + this.to.toString;
+  }
 }

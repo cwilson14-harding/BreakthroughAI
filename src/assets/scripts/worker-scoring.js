@@ -261,14 +261,14 @@ var AIBoard = /** @class */ (function () {
         if (fromPlayer === void 0) { fromPlayer = this.turn; }
         // Count the material.
         var pieceMap = [
-            5, 15, 15, 5, 5, 15, 15, 5,
-            2, 3, 3, 3, 3, 3, 3, 2,
-            4, 6, 6, 6, 6, 6, 6, 4,
+            5, 20, 20, 5, 5, 20, 20, 5,
+            2, 6, 6, 3, 3, 6, 6, 2,
+            4, 9, 9, 6, 6, 9, 9, 4,
             7, 10, 10, 10, 10, 10, 10, 7,
             11, 15, 15, 15, 15, 15, 15, 11,
             16, 21, 21, 21, 21, 21, 21, 16,
             20, 28, 28, 28, 28, 28, 28, 20,
-            36, 36, 36, 36, 36, 36, 36, 36
+            500, 500, 500, 500, 500, 500, 500, 500
         ];
         var board = this.getNormalizedState(fromPlayer);
         var score = 0;
@@ -280,7 +280,7 @@ var AIBoard = /** @class */ (function () {
                 score += pieceMap[c];
                 // Check reinforcement/threats
                 var target = Coordinate.fromIndex(c);
-                var stability = 0;
+                var stability = -1;
                 // Check reinforcing.
                 for (var _i = 0, _a = [c - 8 - 1, c - 8 + 1]; _i < _a.length; _i++) {
                     var index = _a[_i];
@@ -293,11 +293,11 @@ var AIBoard = /** @class */ (function () {
                 for (var _b = 0, _c = [c + 8 - 1, c + 8 + 1]; _b < _c.length; _b++) {
                     var index = _c[_b];
                     var other = Coordinate.fromIndex(index);
-                    if (other.row === target.row + 1 && Math.abs(other.column - target.column) === 1 && other.row < 8 && board[other.index] === 1) {
+                    if (other.row === target.row + 1 && Math.abs(other.column - target.column) === 1 && other.row < 8 && board[other.index] === 2) {
                         stability--;
                     }
                 }
-                score += stability * 10;
+                score += stability;
             }
             else if (board[c] === 2) {
                 enemyPieces.push(c);

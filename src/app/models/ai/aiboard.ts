@@ -195,7 +195,6 @@ export class AIBoard {
 			20, 28, 28, 28, 28, 28, 28, 20,
 			36, 36, 36, 36, 36, 36, 36, 36];
 		const board = this.getNormalizedState(fromPlayer);
-		console.log(board);
 		let score = 0;
 
 		const myPieces = [];
@@ -236,5 +235,26 @@ export class AIBoard {
 
 		// Return the score.
 		return score;
+	}
+
+	outputPossibleMovesAndScores() {
+		const possibleMoves = [];
+		const state = this.getAIBoardState();
+		const turn = this.turn;
+
+		for (let j = 0; j < 64; ++j) {
+			const from: Coordinate = Coordinate.fromIndex(j);
+			const moves: Coordinate[] = this.findAvailableMoves(from);
+
+			for (const to of moves) {
+				const move = new Move(from, to);
+				this.makeMove(move);
+				const score = this.scoreBoardState(turn);
+				this.setAIBoardState(state);
+				possibleMoves.push([move.toString, score]);
+			}
+		}
+
+		return possibleMoves;
 	}
 }

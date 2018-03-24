@@ -188,6 +188,11 @@
             temp1.aiBoard.turn = player;
           console.log(temp1.aiBoard.scoreBoardState());
       }
+
+      function showMoves() {
+          refreshBoard();
+          return temp1.aiBoard.outputPossibleMovesAndScores();
+      }
   </script>
 </head>
 <body>
