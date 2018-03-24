@@ -55,7 +55,7 @@ export class GameBoardComponent implements OnInit {
 		}
 	}
 
-	constructor(public db: AngularFirestore, private router: Router, public auth: AuthService, public afAuth: AngularFireAuth, private gameService: GameService) {
+	constructor(public db: AngularFirestore, private router: Router, public auth: AuthService, private gameService: GameService) {
 		this.board = new Board();
 		this.board.newGame();
 		console.log(this.board);
@@ -66,7 +66,7 @@ export class GameBoardComponent implements OnInit {
 		// this.games = this.db.collection('games', ref => ref.where('creatorName', '==', this.currentUserName));
 		gameService.newGame(
 			new PlayerData('CJ', '', PlayerType.Local),
-			new PlayerData('Jack', '', PlayerType.AI),
+			new PlayerData('Jack', '', PlayerType.Local),
 			'');
 		this.games = this.db.collection('games').valueChanges();
 		if (this.gameService.gameId !== '') {
@@ -105,7 +105,7 @@ export class GameBoardComponent implements OnInit {
 					setTimeout(() => {
 						// this.router.navigateByUrl(('game-over'));
 						// TODO: Go to game over screen.
-						//alert(winnerData.name + ' [' + winner + '] has won!');
+						// alert(winnerData.name + ' [' + winner + '] has won!');
 						// this.router.navigateByUrl(('main-menu'));
 
 						// Train the losing AI.

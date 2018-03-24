@@ -1,4 +1,5 @@
 import {Move} from '../move';
+import {Coordinate} from '../game-core/coordinate';
 
 export class AIBoard {
 	board: number[];
@@ -160,7 +161,7 @@ export class AIBoard {
 			16, 21, 21, 21, 21, 21, 21, 16,
 			20, 28, 28, 28, 28, 28, 28, 20,
 			36, 36, 36, 36, 36, 36, 36, 36];
-		const board = this.getNormalizedState(this.turn * -1);
+		const board = this.getNormalizedState(this.turn);
 		let score = 0;
 
 		const myPieces = [];
@@ -169,6 +170,29 @@ export class AIBoard {
 			if (board[c] === 1) {
 				myPieces.push(c);
 				score += pieceMap[c];
+
+				// Check reinforcement/threats
+				const target: Coordinate = Coordinate.fromIndex(c);
+				let stability = 0;
+
+				// Check reinforcing.
+				for (const index of [c - 8 - 1, c - 8 + 1]) {
+					const other: Coordinate = Coordinate.fromIndex(index);
+					if (other.row === target.row - 1 && Math.abs(other.column - target.column) === 1 && other.row >= 0 && board[other.index] === 1) {
+						stability++;
+					}
+				}
+
+				// Check threatening.
+				for (const index of [c + 8 - 1, c + 8 + 1]) {
+					const other: Coordinate = Coordinate.fromIndex(index);
+					if (other.row === target.row + 1 && Math.abs(other.column - target.column) === 1 && other.row < 8 && board[other.index] === 1) {
+						stability--;
+					}
+				}
+
+				score += stability * 10;
+
 			} else if (board[c] === -1) {
 				enemyPieces.push(c);
 			}
@@ -177,7 +201,8 @@ export class AIBoard {
 		score += (myPieces.length - enemyPieces.length) * 10;
 		
 
-
+		// TODO: Score board state on potentially capturing moves.
+		// TODO: Choose highest scoring move.
 
 		// Return the score.
 		return score;
